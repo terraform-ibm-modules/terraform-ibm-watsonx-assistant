@@ -11,14 +11,13 @@ module "resource_group" {
 }
 
 ########################################################################################################################
-# COS instance
+# Watsonx Assistant
 ########################################################################################################################
 
-resource "ibm_resource_instance" "cos_instance" {
-  name              = "${var.prefix}-cos"
-  resource_group_id = module.resource_group.resource_group_id
-  service           = "cloud-object-storage"
-  plan              = "standard"
-  location          = "global"
-  tags              = var.resource_tags
+module "watsonx_assistant" {
+  source                  = "../../"
+  region                  = var.region
+  watsonx_assistance_name = "${var.prefix}-watsonx-assistant-instance"
+  resource_group_id       = module.resource_group.resource_group_id
+  watsonx_assistant_plan  = "free"
 }
