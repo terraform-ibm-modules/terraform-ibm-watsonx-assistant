@@ -26,3 +26,8 @@ output "watsonx_assistant_dashboard_url" {
   description = "The dashboard URL of the watsonx Assistant instance."
   value       = local.watsonx_assistant_dashboard_url
 }
+
+output "resource_group_id" {
+  description = "The resource group ID to provision the watsonx assistant instance."
+  value       = module.resource_group.resource_group_id
+}

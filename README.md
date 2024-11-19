@@ -1,5 +1,4 @@
-<!-- Update this title with a descriptive name. Use sentence case. -->
-# Terraform modules template project
+# Terraform IBM Watsonx Assistant
 
 <!--
 Update status and "latest release" badges:
@@ -20,7 +19,11 @@ For information, see "Module names and descriptions" at
 https://terraform-ibm-modules.github.io/documentation/#/implementation-guidelines?id=module-names-and-descriptions
 -->
 
-TODO: Replace this with a description of the modules in this repo.
+The watsonx Assistant is designed to automate the deployment and configuration of the IBM watsonx Assistant which is a next-gen conversational AI solution.
+
+For further information please refer the watsonx Assistant [documentation](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-welcome-new-assistant)
+ and [this](https://www.ibm.com/products/watsonx-assistant) for various use cases with Watsonx Assistant.
+
 
 
 <!-- The following content is automatically populated by the pre-commit hook -->
@@ -43,7 +46,10 @@ https://terraform-ibm-modules.github.io/documentation/#/implementation-guideline
 
 
 <!-- Replace this heading with the name of the root level module (the repo name) -->
+
 ## terraform-ibm-watsonx-assistant
+
+This module supports provisioning the watsonx Assistant instance with a selectable service plan.
 
 ### Usage
 
@@ -55,7 +61,10 @@ unless real values don't help users know what to change.
 -->
 
 ```hcl
+module "watsonx_assistance" {
+    source = "terraform-ibm-modules/watsonx-assistant/ibm"
 
+}
 ```
 
 ### Required access policies
@@ -96,7 +105,7 @@ statement instead the previous block.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.0 |
 | <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.70.1, < 2.0.0 |
 
 ### Modules
@@ -114,17 +123,20 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_existing_assistant_instance"></a> [existing\_assistant\_instance](#input\_existing\_assistant\_instance) | CRN of the an existing watsonx Assistance instance. | `string` | `null` | no |
-| <a name="input_region"></a> [region](#input\_region) | The region that's used with the IBM Cloud Terraform IBM provider. It's also used during resource creation. | `string` | `"us-south"` | no |
-| <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The resource group ID where the Event Streams instance is created. | `string` | n/a | yes |
-| <a name="input_watsonx_assistance_name"></a> [watsonx\_assistance\_name](#input\_watsonx\_assistance\_name) | The name of the watsonx assistance instance. | `string` | n/a | yes |
-| <a name="input_watsonx_assistant_plan"></a> [watsonx\_assistant\_plan](#input\_watsonx\_assistant\_plan) | The plan that's used to provision the watsonx Assistance instance. | `string` | `"do not install"` | no |
+| <a name="input_existing_assistant_instance"></a> [existing\_assistant\_instance](#input\_existing\_assistant\_instance) | CRN of the an existing watsonx Assistant instance. | `string` | `null` | no |
+| <a name="input_ibmcloud_api_key"></a> [ibmcloud\_api\_key](#input\_ibmcloud\_api\_key) | The API key that is used with the IBM Cloud Terraform IBM provider. | `string` | n/a | yes |
+| <a name="input_region"></a> [region](#input\_region) | The region that is used with the IBM Cloud Terraform IBM provider. It's also used during resource creation. | `string` | `"us-south"` | no |
+| <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The resource group ID where the watsonx Assistant instance is created. | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | Metadata labels describing this watsonx Assistant instance. | `list(string)` | `[]` | no |
+| <a name="input_watsonx_assistant_name"></a> [watsonx\_assistant\_name](#input\_watsonx\_assistant\_name) | The name of the watsonx assistant instance. | `string` | n/a | yes |
+| <a name="input_watsonx_assistant_plan"></a> [watsonx\_assistant\_plan](#input\_watsonx\_assistant\_plan) | The plan that is required to provision the watsonx Assistant instance. | `string` | `"trial"` | no |
 | <a name="input_watsonx_assistant_service_endpoints"></a> [watsonx\_assistant\_service\_endpoints](#input\_watsonx\_assistant\_service\_endpoints) | The type of service endpoints. Possible values: 'public', 'private', 'public-and-private'. | `string` | `"public"` | no |
 
 ### Outputs
 
 | Name | Description |
 |------|-------------|
+| <a name="output_resource_group_id"></a> [resource\_group\_id](#output\_resource\_group\_id) | The resource group ID to provision the watsonx assistant instance. |
 | <a name="output_watsonx_assistant_crn"></a> [watsonx\_assistant\_crn](#output\_watsonx\_assistant\_crn) | The CRN of the watsonx Assistant instance. |
 | <a name="output_watsonx_assistant_dashboard_url"></a> [watsonx\_assistant\_dashboard\_url](#output\_watsonx\_assistant\_dashboard\_url) | The dashboard URL of the watsonx Assistant instance. |
 | <a name="output_watsonx_assistant_guid"></a> [watsonx\_assistant\_guid](#output\_watsonx\_assistant\_guid) | The GUID of the watsonx Assistant instance. |

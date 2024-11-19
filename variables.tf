@@ -2,46 +2,57 @@
 # Input Variables
 ########################################################################################################################
 
-variable "watsonx_assistance_name" {
+variable "ibmcloud_api_key" {
+  description = "The API key that is used with the IBM Cloud Terraform IBM provider."
+  sensitive   = true
   type        = string
-  description = "The name of the watsonx assistance instance."
 }
 
 variable "resource_group_id" {
-  description = "The resource group ID where the Event Streams instance is created."
+  description = "The resource group ID where the watsonx Assistant instance is created."
   type        = string
 }
 
 variable "region" {
   default     = "us-south"
-  description = "The region that's used with the IBM Cloud Terraform IBM provider. It's also used during resource creation."
+  description = "The region that is used with the IBM Cloud Terraform IBM provider. It's also used during resource creation."
   type        = string
-  validation {
-    condition     = contains(["eu-de", "us-south", "eu-gb", "jp-tok"], var.region)
-    error_message = "You must specify `eu-de`, `eu-gb`, `jp-tok` or `us-south` as the IBM Cloud region."
-  }
+}
+
+variable "tags" {
+  type        = list(string)
+  description = "Metadata labels describing this watsonx Assistant instance."
+  default     = []
+}
+
+variable "watsonx_assistant_name" {
+  type        = string
+  description = "The name of the watsonx assistant instance."
 }
 
 variable "existing_assistant_instance" {
   default     = null
-  description = "CRN of the an existing watsonx Assistance instance."
+  description = "CRN of the an existing watsonx Assistant instance."
   type        = string
 }
 
 variable "watsonx_assistant_plan" {
-  default     = "do not install"
-  description = "The plan that's used to provision the watsonx Assistance instance."
+  default     = "trial"
+  description = "The plan that is required to provision the watsonx Assistant instance."
   type        = string
   validation {
     condition = anytrue([
-      var.watsonx_assistant_plan == "do not install",
-      var.watsonx_assistant_plan == "free",
-      var.watsonx_assistant_plan == "plus-trial",
+      var.watsonx_assistant_plan == "trial",
+      var.watsonx_assistant_plan == "lite",
       var.watsonx_assistant_plan == "plus",
       var.watsonx_assistant_plan == "enterprise",
       var.watsonx_assistant_plan == "enterprisedataisolation",
     ])
-    error_message = "You must use a free, trial, plus-trial, enterprise, or enterprisedataisolation plan. Learn more."
+    error_message = "You must use a Trial, Lite, Plus, Enterprise, or Enterprise with data isolation plan. [Learn more](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-admin-managing-plan)."
+  }
+  validation {
+    condition     = !(contains(["trial", "lite"], var.watsonx_assistant_plan) && var.watsonx_assistant_service_endpoints != "public")
+    error_message = "The 'Trial' and 'Lite' plans only support public endpoints."
   }
 }
 
