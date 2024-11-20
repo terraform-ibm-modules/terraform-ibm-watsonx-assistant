@@ -1,3 +1,7 @@
+##############################################################################
+# Watsonx Assistant
+##############################################################################
+
 locals {
   watsonx_assistant_crn           = var.existing_assistant_instance != null ? data.ibm_resource_instance.existing_assistant_instance[0].crn : var.watsonx_assistant_plan != "do not install" ? resource.ibm_resource_instance.watsonx_assistant_instance[0].crn : null
   watsonx_assistant_guid          = var.existing_assistant_instance != null ? data.ibm_resource_instance.existing_assistant_instance[0].guid : var.watsonx_assistant_plan != "do not install" ? resource.ibm_resource_instance.watsonx_assistant_instance[0].guid : null
@@ -26,4 +30,15 @@ resource "ibm_resource_instance" "watsonx_assistant_instance" {
     update = "15m"
     delete = "15m"
   }
+}
+
+##############################################################################
+# Attach Access Tags
+##############################################################################
+
+resource "ibm_resource_tag" "watsonx_assistant_tag" {
+  count       = length(var.access_tags) == 0 ? 0 : 1
+  resource_id = ibm_resource_instance.watsonx_assistant_instance[0].crn
+  tags        = var.access_tags
+  tag_type    = "access"
 }
