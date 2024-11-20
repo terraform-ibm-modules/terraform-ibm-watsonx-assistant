@@ -125,13 +125,13 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_assistant_name"></a> [assistant\_name](#input\_assistant\_name) | The name of the watsonx assistant instance. | `string` | n/a | yes |
 | <a name="input_existing_assistant_instance"></a> [existing\_assistant\_instance](#input\_existing\_assistant\_instance) | CRN of the an existing watsonx Assistant instance. | `string` | `null` | no |
-| <a name="input_plan"></a> [plan](#input\_plan) | The plan that is required to provision the watsonx Assistant instance. | `string` | `"trial"` | no |
 | <a name="input_region"></a> [region](#input\_region) | IBM Cloud region where watsonx Assistant instance will be created. | `string` | n/a | yes |
 | <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The Id of an existing IBM Cloud resource group where the watsonx Assistant instance will be grouped. | `string` | n/a | yes |
-| <a name="input_service_endpoints"></a> [service\_endpoints](#input\_service\_endpoints) | The type of service endpoints. Possible values: 'public', 'private', 'public-and-private'. | `string` | `"public"` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Metadata labels describing this watsonx Assistant instance. | `list(string)` | `[]` | no |
+| <a name="input_watsonx_assistant_name"></a> [watsonx\_assistant\_name](#input\_watsonx\_assistant\_name) | The name of the watsonx assistant instance. | `string` | n/a | yes |
+| <a name="input_watsonx_assistant_plan"></a> [watsonx\_assistant\_plan](#input\_watsonx\_assistant\_plan) | The plan that is required to provision the watsonx Assistant instance. | `string` | `"trial"` | no |
+| <a name="input_watsonx_assistant_service_endpoints"></a> [watsonx\_assistant\_service\_endpoints](#input\_watsonx\_assistant\_service\_endpoints) | The type of service endpoints. Possible values: 'public', 'private', 'public-and-private'. | `string` | `"public"` | no |
 
 ### Outputs
 
