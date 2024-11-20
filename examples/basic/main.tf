@@ -18,6 +18,6 @@ module "watsonx_assistant" {
   source                 = "../../"
   region                 = var.region
   watsonx_assistant_name = "${var.prefix}-wx-assistant-basic"
-  watsonx_assistant_plan = "lite"
+  watsonx_assistant_plan = "plus"
   resource_group_id      = module.resource_group.resource_group_id
 }
