@@ -15,9 +15,9 @@ module "resource_group" {
 ########################################################################################################################
 
 module "watsonx_assistant" {
-  source                  = "../../"
-  region                  = var.region
-  watsonx_assistance_name = "${var.prefix}-watsonx-assistant-instance"
-  resource_group_id       = module.resource_group.resource_group_id
-  watsonx_assistant_plan  = "free"
+  source            = "../../"
+  region            = var.region
+  assistant_name    = "${var.prefix}-wx-assistant-basic"
+  plan              = "lite"
+  resource_group_id = module.resource_group.resource_group_id
 }
