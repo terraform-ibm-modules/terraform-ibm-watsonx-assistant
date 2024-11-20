@@ -13,7 +13,7 @@ const resourceGroup = "geretain-test-resources"
 const basicExampleDir = "examples/basic"
 
 func setupOptions(t *testing.T, prefix string, exampleDir string) *testhelper.TestOptions {
-	options := testhelper.TestOptionsDefaultWithVars(&testhelper.TestOptions{
+	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
 		Testing:       t,
 		TerraformDir:  exampleDir,
 		Prefix:        prefix,
