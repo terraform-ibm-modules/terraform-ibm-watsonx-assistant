@@ -3,17 +3,27 @@
 ########################################################################################################################
 
 variable "resource_group_id" {
-  description = "The Id of an IBM Cloud resource group where the watsonx Assistant instance will be grouped."
+  description = "The Id of an IBM Cloud resource group where the watsonx Assistant instance will be grouped. Required when creating a new instance."
   type        = string
+  default     = null
+  validation {
+    condition     = var.existing_watsonx_assistant_instance_crn != null || var.resource_group_id != null
+    error_message = "Resource group id must be provided when existing_watsonx_assistant_instance_crn is not set."
+  }
 }
 
 variable "region" {
-  description = "IBM Cloud region where watsonx Assistant instance will be created."
+  description = "IBM Cloud region where the watsonx Assistant instance will be created. Required if creating a new instance."
   type        = string
   default     = null
+  validation {
+    condition     = var.existing_watsonx_assistant_instance_crn != null || var.region != null
+    error_message = "Region must be provided when existing_watsonx_assistant_instance_crn is not set."
+  }
 }
 
-variable "tags" {
+
+variable "resource_tags" {
   description = "Metadata labels describing this watsonx Assistant instance."
   type        = list(string)
   default     = []
@@ -33,9 +43,13 @@ variable "access_tags" {
 }
 
 variable "watsonx_assistant_name" {
-  description = "The name of the watsonx assistant instance."
+  description = "The name of the watsonx Assistant instance. Required if creating a new instance."
   type        = string
   default     = null
+  validation {
+    condition     = var.existing_watsonx_assistant_instance_crn != null || var.watsonx_assistant_name != null
+    error_message = "watsonx Assistant name must be provided when existing_watsonx_assistant_instance_crn is not set."
+  }
 }
 
 variable "existing_watsonx_assistant_instance_crn" {
@@ -56,7 +70,6 @@ variable "watsonx_assistant_plan" {
   default     = "trial"
   validation {
     condition = anytrue([
-      var.watsonx_assistant_plan == "do not install",
       var.watsonx_assistant_plan == "trial",
       var.watsonx_assistant_plan == "lite",
       var.watsonx_assistant_plan == "plus",

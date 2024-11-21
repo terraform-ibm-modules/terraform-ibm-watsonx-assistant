@@ -35,3 +35,9 @@ variable "access_tags" {
   description = "Optional list of access management tags to add to the watsonx Assistant instance"
   default     = []
 }
+
+variable "resource_tags" {
+  type        = list(string)
+  description = "Optional list of tags to be added to the watsonx Assistance instance."
+  default     = []
+}

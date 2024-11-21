@@ -20,5 +20,6 @@ module "watsonx_assistant" {
   watsonx_assistant_name = "${var.prefix}-wx-assistant"
   watsonx_assistant_plan = "plus"
   resource_group_id      = module.resource_group.resource_group_id
+  resource_tags          = var.resource_tags
   access_tags            = var.access_tags
 }
