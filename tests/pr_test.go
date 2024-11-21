@@ -21,7 +21,7 @@ const yamlLocation = "../common-dev-assets/common-go-assets/common-permanent-res
 var permanentResources map[string]interface{}
 
 func TestMain(m *testing.M) {
-	// Read the YAML file contents
+	// Read the YAML file content
 	var err error
 	permanentResources, err = common.LoadMapFromYaml(yamlLocation)
 	if err != nil {
