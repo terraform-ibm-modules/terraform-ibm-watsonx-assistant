@@ -3,13 +3,14 @@
 ########################################################################################################################
 
 variable "resource_group_id" {
-  description = "The Id of an existing IBM Cloud resource group where the watsonx Assistant instance will be grouped."
+  description = "The Id of an IBM Cloud resource group where the watsonx Assistant instance will be grouped."
   type        = string
 }
 
 variable "region" {
   description = "IBM Cloud region where watsonx Assistant instance will be created."
   type        = string
+  default     = null
 }
 
 variable "tags" {
@@ -34,10 +35,17 @@ variable "access_tags" {
 variable "watsonx_assistant_name" {
   description = "The name of the watsonx assistant instance."
   type        = string
+  default     = null
 }
 
-variable "existing_assistant_instance" {
+variable "existing_watsonx_assistant_instance_crn" {
   description = "CRN of the an existing watsonx Assistant instance."
+  type        = string
+  default     = null
+}
+
+variable "existing_watsonx_assistant_instance_name" {
+  description = "The name of an existing watsonx Assistant instance."
   type        = string
   default     = null
 }

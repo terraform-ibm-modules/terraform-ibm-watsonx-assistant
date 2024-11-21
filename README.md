@@ -29,6 +29,7 @@ For further information on IBM watsonx Assistant, including supported features, 
 * [terraform-ibm-watsonx-assistant](#terraform-ibm-watsonx-assistant)
 * [Examples](./examples)
     * [Basic example](./examples/basic)
+    * [Existing Instance example](./examples/existing-instance)
 * [Contributing](#contributing)
 <!-- END OVERVIEW HOOK -->
 
@@ -127,11 +128,12 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_access_tags"></a> [access\_tags](#input\_access\_tags) | A list of access tags to apply to the watsonx Assistance instance created by the module. For more information, see https://cloud.ibm.com/docs/account?topic=account-access-tags-tutorial. | `list(string)` | `[]` | no |
-| <a name="input_existing_assistant_instance"></a> [existing\_assistant\_instance](#input\_existing\_assistant\_instance) | CRN of the an existing watsonx Assistant instance. | `string` | `null` | no |
-| <a name="input_region"></a> [region](#input\_region) | IBM Cloud region where watsonx Assistant instance will be created. | `string` | n/a | yes |
-| <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The Id of an existing IBM Cloud resource group where the watsonx Assistant instance will be grouped. | `string` | n/a | yes |
+| <a name="input_existing_watsonx_assistant_instance_crn"></a> [existing\_watsonx\_assistant\_instance\_crn](#input\_existing\_watsonx\_assistant\_instance\_crn) | CRN of the an existing watsonx Assistant instance. | `string` | `null` | no |
+| <a name="input_existing_watsonx_assistant_instance_name"></a> [existing\_watsonx\_assistant\_instance\_name](#input\_existing\_watsonx\_assistant\_instance\_name) | The name of an existing watsonx Assistant instance. | `string` | `null` | no |
+| <a name="input_region"></a> [region](#input\_region) | IBM Cloud region where watsonx Assistant instance will be created. | `string` | `null` | no |
+| <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The Id of an IBM Cloud resource group where the watsonx Assistant instance will be grouped. | `string` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | Metadata labels describing this watsonx Assistant instance. | `list(string)` | `[]` | no |
-| <a name="input_watsonx_assistant_name"></a> [watsonx\_assistant\_name](#input\_watsonx\_assistant\_name) | The name of the watsonx assistant instance. | `string` | n/a | yes |
+| <a name="input_watsonx_assistant_name"></a> [watsonx\_assistant\_name](#input\_watsonx\_assistant\_name) | The name of the watsonx assistant instance. | `string` | `null` | no |
 | <a name="input_watsonx_assistant_plan"></a> [watsonx\_assistant\_plan](#input\_watsonx\_assistant\_plan) | The plan that is required to provision the watsonx Assistant instance. | `string` | `"trial"` | no |
 | <a name="input_watsonx_assistant_service_endpoints"></a> [watsonx\_assistant\_service\_endpoints](#input\_watsonx\_assistant\_service\_endpoints) | The type of service endpoints. Possible values: 'public', 'private', 'public-and-private'. | `string` | `"public"` | no |
 
