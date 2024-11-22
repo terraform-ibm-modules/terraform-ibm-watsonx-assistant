@@ -13,15 +13,22 @@ variable "resource_group_id" {
 }
 
 variable "region" {
-  description = "IBM Cloud region where the watsonx Assistant instance will be created. Required if creating a new instance."
+  description = "IBM Cloud region where the watsonx Assistant instance will be created. Required if creating a new instance. If using an existing instance, this can be null."
   type        = string
   default     = null
+
   validation {
-    condition     = var.existing_watsonx_assistant_instance_crn != null || var.region != null
-    error_message = "Region must be provided when existing_watsonx_assistant_instance_crn is not set."
+    condition = var.existing_watsonx_assistant_instance_crn != null || (var.region != null && anytrue([
+      var.region == "eu-de",
+      var.region == "us-south",
+      var.region == "eu-gb",
+      var.region == "jp-tok",
+      var.region == "au-syd",
+      var.region == "us-east"
+    ]))
+    error_message = "IBM Cloud Region must be provided and set to one of the allowed values ('eu-de', 'eu-gb', 'jp-tok', 'au-syd', 'us-east', 'us-south') when creating a new instance."
   }
 }
-
 
 variable "resource_tags" {
   description = "Metadata labels describing this watsonx Assistant instance."
@@ -48,7 +55,7 @@ variable "watsonx_assistant_name" {
   default     = null
   validation {
     condition     = var.existing_watsonx_assistant_instance_crn != null || var.watsonx_assistant_name != null
-    error_message = "watsonx Assistant name must be provided when existing_watsonx_assistant_instance_crn is not set."
+    error_message = "watsonx Assistant name must be provided when creating a new instance."
   }
 }
 
@@ -67,7 +74,12 @@ variable "existing_watsonx_assistant_instance_name" {
 variable "watsonx_assistant_plan" {
   description = "The plan that is required to provision the watsonx Assistant instance."
   type        = string
-  default     = "trial"
+  default     = null
+
+  validation {
+    condition     = var.existing_watsonx_assistant_instance_crn != null || var.watsonx_assistant_plan != null
+    error_message = "watsonx Assistant plan must be provided when creating a new instance."
+  }
   validation {
     condition = anytrue([
       var.watsonx_assistant_plan == "trial",

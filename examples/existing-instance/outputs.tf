@@ -17,9 +17,9 @@ output "region" {
   value       = data.ibm_resource_instance.existing_assistant_instance[0].location
 }
 
-output "watsonx_assistant_crn" {
-  description = "CRN of the watsonx Assistant instance"
-  value       = data.ibm_resource_instance.existing_assistant_instance[0].crn
+output "watsonx_assistant_name" {
+  description = "The name of the watsonx Assistant instance"
+  value       = data.ibm_resource_instance.existing_assistant_instance[0].name
 }
 
 output "watsonx_assistant_guid" {
