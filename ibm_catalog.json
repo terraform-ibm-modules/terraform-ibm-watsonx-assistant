@@ -1,0 +1,187 @@
+{
+  "products": [
+    {
+      "name": "deploy-arch-ibm-watsonx-assistant",
+      "label": "watsonx Assistant",
+      "product_kind": "solution",
+      "tags": [
+        "ibm_created",
+        "target_terraform",
+        "terraform",
+        "ai",
+        "chat",
+        "solution"
+      ],
+      "keywords": [
+        "watsonx assistant",
+        "conversation",
+        "assistant",
+        "IaC",
+        "infrastructure as code",
+        "terraform",
+        "solution",
+        "ai"
+      ],
+      "short_description": "Creates and configures an instance of IBM watsonx Assistant.",
+      "long_description": "This architecture supports creating and configuring an instance of watsonx Assistant.",
+      "offering_docs_url": "https://github.com/terraform-ibm-modules/terraform-ibm-watsonx-assistant/blob/main/README.md",
+      "offering_icon_url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-watsonx-assistant/main/images/watsonx-assistant.svg",
+      "provider_name": "IBM",
+      "features": [
+        {
+          "title": "Creates an instance of IBM watsonx Assistant",
+          "description": "Creates and configures an IBM watsonx Assistant instance."
+        }
+      ],
+      "flavors": [
+        {
+          "label": "Standard",
+          "name": "standard",
+          "install_type": "fullstack",
+          "working_directory": "solutions/standard",
+          "compliance": {
+            "authority": "scc-v3",
+            "profiles": [
+              {
+                "profile_name": "IBM Cloud Framework for Financial Services",
+                "profile_version": "1.6.0"
+              }
+            ]},
+          "iam_permissions": [
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::role:Administrator"
+              ],
+              "service_name": "all-account-management-services"
+            },
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ],
+              "service_name": "conversation"
+            }
+          ],
+          "architecture": {
+            "descriptions": "This architecture creates an instance of IBM watsonx Assistant.",
+            "features": [
+              {
+                "title": " Creates an instance of watsonx Assistant",
+                "description": "This architecture creates an instance of IBM watsonx Assistant. It accepts or creates a resource group."
+              }
+            ],
+            "diagrams": [
+              {
+                "diagram": {
+                  "caption": "watsonx Assistant on IBM Cloud",
+                  "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-watsonx-assistant/main/reference-architecture/deployable-architecture-watsonx-assistant.svg",
+                  "type": "image/svg+xml"
+                },
+                "description": "This architecture supports creating and configuring an instance of watsonx Assistant."
+              }
+            ]
+          },
+          "configuration": [
+              {
+                "key": "ibmcloud_api_key"
+              },
+              {
+                "key": "use_existing_resource_group"
+              },
+              {
+                "key": "resource_group_name"
+              },
+              {
+                "key": "prefix"
+              },
+              {
+                "key": "name"
+              },
+              {
+                "key": "region",
+                "required": true,
+                "default_value": "us-south",
+                "options": [
+                  {
+                    "displayname": "Dallas (us-south)",
+                    "value": "us-south"
+                  },
+                  {
+                    "displayname": "Frankfurt (eu-de)",
+                    "value": "eu-de"
+                  },
+                  {
+                    "displayname": "London (eu-gb)",
+                    "value": "eu-gb"
+                  },
+                  {
+                    "displayname": "Sydney (au-syd)",
+                    "value": "au-syd"
+                  },
+                  {
+                    "displayname": "Tokyo (jp-tok)",
+                    "value": "jp-tok"
+                  },
+                  {
+                    "displayname": "Washington DC (us-east)",
+                    "value": "us-east"
+                  }
+                ]
+              },
+              {
+                "key": "plan",
+                "required": true,
+                "default_value": "trial",
+                "options": [
+                  {
+                    "displayname": "Trial",
+                    "value": "trial"
+                  },
+                  {
+                    "displayname": "Lite",
+                    "value": "lite"
+                  },
+                  {
+                    "displayname": "Plus",
+                    "value": "plus"
+                  },
+                  {
+                    "displayname": "Enterprise",
+                    "value": "enterprise"
+                  },
+                  {
+                    "displayname": "Enterprise with data isolation",
+                    "value": "enterprisedataisolation"
+                  }
+                ]
+              },
+              {
+                "key": "resource_tags"
+              },
+              {
+                "key": "access_tags"
+              },
+              {
+                "key": "plan",
+                "required": true,
+                "default_value": "public",
+                "options": [
+                  {
+                    "displayname": "Public Network",
+                    "value": "public"
+                  },
+                  {
+                    "displayname": "Private Network",
+                    "value": "private"
+                  },
+                  {
+                    "displayname": "Both Public & Private Network",
+                    "value": "public-and-private"
+                  }
+                ]
+              }
+            ]
+        }
+      ]
+    }
+  ]
+}

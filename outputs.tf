@@ -2,6 +2,11 @@
 # Outputs
 ########################################################################################################################
 
+output "watsonx_assistant_id" {
+  description = "The unique ID of the watsonx Assistant instance."
+  value       = local.watsonx_assistant_id
+}
+
 output "watsonx_assistant_crn" {
   description = "The CRN of the watsonx Assistant instance."
   value       = local.watsonx_assistant_crn

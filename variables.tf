@@ -20,6 +20,10 @@ variable "region" {
     condition     = var.existing_watsonx_assistant_instance_crn != null || var.region != null
     error_message = "Region must be provided when existing_watsonx_assistant_instance_crn is not set."
   }
+  validation {
+    condition     = var.region == null || contains(["eu-de", "us-south", "eu-gb", "jp-tok", "au-syd", "us-east"], var.region)
+    error_message = "You must specify one of 'eu-de', 'eu-gb', 'jp-tok', 'au-syd', 'us-east', or 'us-south' as the IBM Cloud region."
+  }
 }
 
 

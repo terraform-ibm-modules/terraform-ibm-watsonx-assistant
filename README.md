@@ -159,6 +159,7 @@ No modules.
 | <a name="output_watsonx_assistant_crn"></a> [watsonx\_assistant\_crn](#output\_watsonx\_assistant\_crn) | The CRN of the watsonx Assistant instance. |
 | <a name="output_watsonx_assistant_dashboard_url"></a> [watsonx\_assistant\_dashboard\_url](#output\_watsonx\_assistant\_dashboard\_url) | The dashboard URL of the watsonx Assistant instance. |
 | <a name="output_watsonx_assistant_guid"></a> [watsonx\_assistant\_guid](#output\_watsonx\_assistant\_guid) | The GUID of the watsonx Assistant instance. |
+| <a name="output_watsonx_assistant_id"></a> [watsonx\_assistant\_id](#output\_watsonx\_assistant\_id) | The unique ID of the watsonx Assistant instance. |
 | <a name="output_watsonx_assistant_name"></a> [watsonx\_assistant\_name](#output\_watsonx\_assistant\_name) | The name of the watsonx Assistant instance. |
 | <a name="output_watsonx_assistant_plan_id"></a> [watsonx\_assistant\_plan\_id](#output\_watsonx\_assistant\_plan\_id) | The plan ID of the watsonx Assistant instance. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

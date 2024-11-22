@@ -20,8 +20,10 @@ const yamlLocation = "../common-dev-assets/common-go-assets/common-permanent-res
 
 var permanentResources map[string]interface{}
 
+const standardSolutionTerraformDir = "solutions/standard"
+
 func TestMain(m *testing.M) {
-	// Read the YAML file content
+	// Read the YAML file contents
 	var err error
 	permanentResources, err = common.LoadMapFromYaml(yamlLocation)
 	if err != nil {
@@ -58,6 +60,52 @@ func TestRunUpgradeExample(t *testing.T) {
 	t.Parallel()
 
 	options := setupOptions(t, "wx-assistant-upg", basicExampleDir)
+
+	output, err := options.RunTestUpgrade()
+	if !options.UpgradeTestSkipped {
+		assert.Nil(t, err, "This should not have errored")
+		assert.NotNil(t, output, "Expected some output")
+	}
+}
+
+func TestRunStandardSolution(t *testing.T) {
+	t.Parallel()
+
+	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
+		Testing:       t,
+		TerraformDir:  standardSolutionTerraformDir,
+		Region:        "us-south",
+		Prefix:        "wx-assistant-da",
+		ResourceGroup: resourceGroup,
+	})
+
+	options.TerraformVars = map[string]interface{}{
+		"plan":                "enterprise",
+		"access_tags":         permanentResources["accessTags"],
+		"resource_group_name": options.Prefix,
+	}
+
+	output, err := options.RunTestConsistency()
+	assert.Nil(t, err, "This should not have errored")
+	assert.NotNil(t, output, "Expected some output")
+}
+
+func TestRunStandardUpgradeSolution(t *testing.T) {
+	t.Parallel()
+
+	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
+		Testing:       t,
+		TerraformDir:  standardSolutionTerraformDir,
+		Region:        "us-south",
+		Prefix:        "wx-assistant-st-da-upg",
+		ResourceGroup: resourceGroup,
+	})
+
+	options.TerraformVars = map[string]interface{}{
+		"plan":                "enterprise",
+		"access_tags":         permanentResources["accessTags"],
+		"resource_group_name": options.Prefix,
+	}
 
 	output, err := options.RunTestUpgrade()
 	if !options.UpgradeTestSkipped {
