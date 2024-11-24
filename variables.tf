@@ -71,6 +71,12 @@ variable "existing_watsonx_assistant_instance_name" {
   default     = null
 }
 
+variable "existing_watsonx_assistant_instance_plan" {
+  description = "Plan type associated with an existing watsonx Assistant instance."
+  type        = string
+  default     = null
+}
+
 variable "watsonx_assistant_plan" {
   description = "The plan that is required to provision the watsonx Assistant instance."
   type        = string
@@ -82,8 +88,8 @@ variable "watsonx_assistant_plan" {
   }
   validation {
     condition = anytrue([
-      var.watsonx_assistant_plan == "trial",
-      var.watsonx_assistant_plan == "lite",
+      var.watsonx_assistant_plan == "plus-trial", #  Refers to Trial Account
+      var.watsonx_assistant_plan == "free",       # Refers to Lite account
       var.watsonx_assistant_plan == "plus",
       var.watsonx_assistant_plan == "enterprise",
       var.watsonx_assistant_plan == "enterprisedataisolation",
@@ -91,8 +97,26 @@ variable "watsonx_assistant_plan" {
     error_message = "You must use a Trial, Lite, Plus, Enterprise, or Enterprise with data isolation plan. [Learn more](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-admin-managing-plan)."
   }
   validation {
-    condition     = !(contains(["trial", "lite"], var.watsonx_assistant_plan) && var.watsonx_assistant_service_endpoints != "public")
+    condition     = !(contains(["plus-trial", "free"], var.watsonx_assistant_plan) && var.watsonx_assistant_service_endpoints != "public")
     error_message = "The 'Trial' and 'Lite' plans only support public endpoints."
+  }
+  validation {
+    condition = !(
+      var.watsonx_assistant_plan == "free" &&
+      anytrue([
+        var.existing_watsonx_assistant_instance_plan == "plus-trial",
+        var.existing_watsonx_assistant_instance_plan == "plus",
+        var.existing_watsonx_assistant_instance_plan == "standard"
+      ])
+    )
+    error_message = "Switching from the Trial, Plus, or Standard plans to the Lite plan is not supported. [Learn more](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-watson-assistant-faqs#faqs-downgrade-plan)"
+  }
+  validation {
+    condition = !(
+      var.existing_watsonx_assistant_instance_plan == "plus-trial" &&
+      var.watsonx_assistant_plan == "standard"
+    )
+    error_message = "Upgrade from a Trial plan to a Standard plan is not supported. [Learn more](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-watson-assistant-faqs#faqs-downgrade-plan)"
   }
 }
 
