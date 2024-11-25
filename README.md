@@ -74,11 +74,10 @@ module "watsonx_assistant" {
 
 - Account Management
     * **Resource Group** service
-        - `Viewer` platform access
+        - `Administrator` platform access
 - IAM Services
     * **watsonx Assistant** service
         - `Editor` platform access
-        - `Manager` platform access (required to enable metrics)
 
 To attach access management tags to resources in this module, you need the following permissions.
 
@@ -143,15 +142,14 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_access_tags"></a> [access\_tags](#input\_access\_tags) | A list of access tags to apply to the watsonx Assistance instance created by the module. For more information, see https://cloud.ibm.com/docs/account?topic=account-access-tags-tutorial. | `list(string)` | `[]` | no |
-| <a name="input_existing_watsonx_assistant_instance_crn"></a> [existing\_watsonx\_assistant\_instance\_crn](#input\_existing\_watsonx\_assistant\_instance\_crn) | CRN of the an existing watsonx Assistant instance. | `string` | `null` | no |
+| <a name="input_existing_watsonx_assistant_instance_crn"></a> [existing\_watsonx\_assistant\_instance\_crn](#input\_existing\_watsonx\_assistant\_instance\_crn) | The CRN of an existing watsonx Assistant instance. | `string` | `null` | no |
 | <a name="input_existing_watsonx_assistant_instance_name"></a> [existing\_watsonx\_assistant\_instance\_name](#input\_existing\_watsonx\_assistant\_instance\_name) | The name of an existing watsonx Assistant instance. | `string` | `null` | no |
-| <a name="input_existing_watsonx_assistant_instance_plan"></a> [existing\_watsonx\_assistant\_instance\_plan](#input\_existing\_watsonx\_assistant\_instance\_plan) | Plan type associated with an existing watsonx Assistant instance. | `string` | `null` | no |
 | <a name="input_region"></a> [region](#input\_region) | IBM Cloud region where the watsonx Assistant instance will be created. Required if creating a new instance. If using an existing instance, this can be null. | `string` | `null` | no |
 | <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The Id of an IBM Cloud resource group where the watsonx Assistant instance will be grouped. Required when creating a new instance. | `string` | `null` | no |
 | <a name="input_resource_tags"></a> [resource\_tags](#input\_resource\_tags) | Metadata labels describing this watsonx Assistant instance. | `list(string)` | `[]` | no |
 | <a name="input_watsonx_assistant_name"></a> [watsonx\_assistant\_name](#input\_watsonx\_assistant\_name) | The name of the watsonx Assistant instance. Required if creating a new instance. | `string` | `null` | no |
 | <a name="input_watsonx_assistant_plan"></a> [watsonx\_assistant\_plan](#input\_watsonx\_assistant\_plan) | The plan that is required to provision the watsonx Assistant instance. | `string` | `null` | no |
-| <a name="input_watsonx_assistant_service_endpoints"></a> [watsonx\_assistant\_service\_endpoints](#input\_watsonx\_assistant\_service\_endpoints) | The type of service endpoints. Possible values: 'public', 'private', 'public-and-private'. | `string` | `"public"` | no |
+| <a name="input_watsonx_assistant_service_endpoints"></a> [watsonx\_assistant\_service\_endpoints](#input\_watsonx\_assistant\_service\_endpoints) | The type of service endpoints. Possible values are : 'public', 'private', 'public-and-private'. | `string` | `"public"` | no |
 
 ### Outputs
 

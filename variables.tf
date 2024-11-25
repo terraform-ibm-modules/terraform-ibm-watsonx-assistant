@@ -60,19 +60,13 @@ variable "watsonx_assistant_name" {
 }
 
 variable "existing_watsonx_assistant_instance_crn" {
-  description = "CRN of the an existing watsonx Assistant instance."
+  description = "The CRN of an existing watsonx Assistant instance."
   type        = string
   default     = null
 }
 
 variable "existing_watsonx_assistant_instance_name" {
   description = "The name of an existing watsonx Assistant instance."
-  type        = string
-  default     = null
-}
-
-variable "existing_watsonx_assistant_instance_plan" {
-  description = "Plan type associated with an existing watsonx Assistant instance."
   type        = string
   default     = null
 }
@@ -100,28 +94,11 @@ variable "watsonx_assistant_plan" {
     condition     = !(contains(["plus-trial", "free"], var.watsonx_assistant_plan) && var.watsonx_assistant_service_endpoints != "public")
     error_message = "The 'Trial' and 'Lite' plans only support public endpoints."
   }
-  validation {
-    condition = !(
-      var.watsonx_assistant_plan == "free" &&
-      anytrue([
-        var.existing_watsonx_assistant_instance_plan == "plus-trial",
-        var.existing_watsonx_assistant_instance_plan == "plus",
-        var.existing_watsonx_assistant_instance_plan == "standard"
-      ])
-    )
-    error_message = "Switching from the Trial, Plus, or Standard plans to the Lite plan is not supported. [Learn more](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-watson-assistant-faqs#faqs-downgrade-plan)"
-  }
-  validation {
-    condition = !(
-      var.existing_watsonx_assistant_instance_plan == "plus-trial" &&
-      var.watsonx_assistant_plan == "standard"
-    )
-    error_message = "Upgrade from a Trial plan to a Standard plan is not supported. [Learn more](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-watson-assistant-faqs#faqs-downgrade-plan)"
-  }
+
 }
 
 variable "watsonx_assistant_service_endpoints" {
-  description = "The type of service endpoints. Possible values: 'public', 'private', 'public-and-private'."
+  description = "The type of service endpoints. Possible values are : 'public', 'private', 'public-and-private'."
   type        = string
   default     = "public"
   validation {
