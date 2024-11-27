@@ -148,7 +148,7 @@ No modules.
 | <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The Id of an IBM Cloud resource group where the watsonx Assistant instance will be grouped. Required when creating a new instance. | `string` | `null` | no |
 | <a name="input_resource_tags"></a> [resource\_tags](#input\_resource\_tags) | Metadata labels describing this watsonx Assistant instance. | `list(string)` | `[]` | no |
 | <a name="input_watsonx_assistant_name"></a> [watsonx\_assistant\_name](#input\_watsonx\_assistant\_name) | The name of the watsonx Assistant instance. Required if creating a new instance. | `string` | `null` | no |
-| <a name="input_watsonx_assistant_plan"></a> [watsonx\_assistant\_plan](#input\_watsonx\_assistant\_plan) | The plan that is required to provision the watsonx Assistant instance. | `string` | `null` | no |
+| <a name="input_watsonx_assistant_plan"></a> [watsonx\_assistant\_plan](#input\_watsonx\_assistant\_plan) | The plan that is required to provision the watsonx Assistant instance. For `Trial` and `Lite` accounts, the `watsonx_assistant_service_endpoints` value is ignored and the default service configuration is applied. | `string` | `null` | no |
 | <a name="input_watsonx_assistant_service_endpoints"></a> [watsonx\_assistant\_service\_endpoints](#input\_watsonx\_assistant\_service\_endpoints) | The type of service endpoints. Possible values are : 'public', 'private', 'public-and-private'. | `string` | `"public"` | no |
 
 ### Outputs

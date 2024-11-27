@@ -72,7 +72,7 @@ variable "existing_watsonx_assistant_instance_name" {
 }
 
 variable "watsonx_assistant_plan" {
-  description = "The plan that is required to provision the watsonx Assistant instance."
+  description = "The plan that is required to provision the watsonx Assistant instance. For `Trial` and `Lite` accounts, the `watsonx_assistant_service_endpoints` value is ignored and the default service configuration is applied."
   type        = string
   default     = null
 
@@ -90,11 +90,6 @@ variable "watsonx_assistant_plan" {
     ])
     error_message = "You must use a Trial, Lite, Plus, Enterprise, or Enterprise with data isolation plan. [Learn more](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-admin-managing-plan)."
   }
-  validation {
-    condition     = !(contains(["plus-trial", "free"], var.watsonx_assistant_plan) && var.watsonx_assistant_service_endpoints != "public")
-    error_message = "The 'Trial' and 'Lite' plans only support public endpoints."
-  }
-
 }
 
 variable "watsonx_assistant_service_endpoints" {
