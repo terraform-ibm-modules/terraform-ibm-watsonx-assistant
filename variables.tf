@@ -3,17 +3,17 @@
 ########################################################################################################################
 
 variable "resource_group_id" {
-  description = "The Id of an IBM Cloud resource group where the watsonx Assistant instance will be grouped. Required when creating a new instance."
+  description = "The resource group ID where the watsonx Assistant instance will be grouped. Required when creating a new instance."
   type        = string
   default     = null
   validation {
     condition     = var.existing_watsonx_assistant_instance_crn != null || var.resource_group_id != null
-    error_message = "Resource group id must be provided when existing_watsonx_assistant_instance_crn is not set."
+    error_message = "You must specify a value for \"resource_group_id\" if \"existing_watsonx_assistant_instance_crn\" is null."
   }
 }
 
 variable "region" {
-  description = "IBM Cloud region where the watsonx Assistant instance will be created. Required if creating a new instance. If using an existing instance, this can be null."
+  description = "Region where the watsonx Assistant instance will be provisioned. Required if creating a new instance. If using an existing instance, this can be null."
   type        = string
   default     = null
 
@@ -26,19 +26,19 @@ variable "region" {
       var.region == "au-syd",
       var.region == "us-east"
     ]))
-    error_message = "IBM Cloud Region must be provided and set to one of the allowed values ('eu-de', 'eu-gb', 'jp-tok', 'au-syd', 'us-east', 'us-south') when creating a new instance."
+    error_message = "Region must be specified and set to one of the permitted values (\"eu-de\", \"eu-gb\", \"jp-tok\", \"au-syd\", \"us-east\", \"us-south\") when provisioning a new instance."
   }
 }
 
 variable "resource_tags" {
-  description = "Metadata labels describing this watsonx Assistant instance."
+  description = "Optional list of tags to describe the watsonx Assistant instance."
   type        = list(string)
   default     = []
 }
 
 variable "access_tags" {
   type        = list(string)
-  description = "A list of access tags to apply to the watsonx Assistance instance created by the module. For more information, see https://cloud.ibm.com/docs/account?topic=account-access-tags-tutorial."
+  description = "A list of access tags to apply to the watsonx Assistant instance created by the module. For more information, see https://cloud.ibm.com/docs/account?topic=account-access-tags-tutorial."
   default     = []
 
   validation {
@@ -87,17 +87,17 @@ variable "watsonx_assistant_plan" {
       var.watsonx_assistant_plan == "plus",
       var.watsonx_assistant_plan == "enterprise",
       var.watsonx_assistant_plan == "enterprisedataisolation",
-    ])
-    error_message = "You must use a Trial, Lite, Plus, Enterprise, or Enterprise with data isolation plan. [Learn more](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-admin-managing-plan)."
+    ]) || var.existing_watsonx_assistant_instance_crn != null
+    error_message = "A new watsonx Assistant instance requires a \"Trial\", \"Lite\", \"Plus\", \"Enterprise\", or \"Enterprise with Data Isolation\" plan. [Learn more](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-admin-managing-plan)."
   }
 }
 
 variable "watsonx_assistant_service_endpoints" {
-  description = "The type of service endpoints. Possible values are : 'public', 'private', 'public-and-private'."
+  description = "Types of the service endpoints that can be set to a watsonx Assistant instance. Possible values are : public, private or public-and-private."
   type        = string
   default     = "public"
   validation {
     condition     = contains(["public", "public-and-private", "private"], var.watsonx_assistant_service_endpoints)
-    error_message = "The specified service endpoint is not valid. Supported options are public, public-and-private, or private."
+    error_message = "The specified service endpoint is not valid. Supported options are \"public\", \"private\", \"public-and-private\"."
   }
 }
