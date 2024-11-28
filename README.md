@@ -72,11 +72,13 @@ module "watsonx_assistant" {
 
 ### Required IAM access policies
 
-- Account Management
-    * **Resource Group** service
-        - `Administrator` platform access
-- IAM Services
-    * **watsonx Assistant** service
+You need the following permissions to run this module:
+
+* Account Management
+  * **Resource Group**
+        - `Administrator` role
+* IAM Services
+  * **watsonx Assistant** service
         - `Editor` platform access
 
 To attach access management tags to resources in this module, you need the following permissions.
