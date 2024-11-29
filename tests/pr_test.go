@@ -121,7 +121,7 @@ func TestRunExistingResourcesExample(t *testing.T) {
 			// Do not hard fail the test if the implicit destroy steps fail to allow a full destroy of resource to occur
 			ImplicitRequired: false,
 			TerraformVars: map[string]interface{}{
-				"existing_watsonx_assistant_instance_crn": terraform.Output(t, existingTerraformOptions, "watsonx_assistant_crn"),
+				"existing_watsonx_assistant_instance_crn": terraform.Output(t, existingTerraformOptions, "crn"),
 			},
 		})
 
