@@ -2,7 +2,7 @@
 # Outputs
 ########################################################################################################################
 
-output "watsonx_assistant_crn" {
+output "crn" {
   description = "CRN of the watsonx Assistant instance"
-  value       = module.watsonx_assistant.watsonx_assistant_crn
+  value       = module.watsonx_assistant.crn
 }

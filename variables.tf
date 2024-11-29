@@ -13,19 +13,19 @@ variable "resource_group_id" {
 }
 
 variable "region" {
-  description = "Region where the watsonx Assistant instance will be provisioned. Required if creating a new instance. If using an existing instance, this can be null."
+  description = "Region where the watsonx Assistant instance will be provisioned. Required if creating a new instance."
   type        = string
-  default     = null
+  default     = "us-south"
 
   validation {
-    condition = var.existing_watsonx_assistant_instance_crn != null || (var.region != null && anytrue([
+    condition = var.existing_watsonx_assistant_instance_crn != null || anytrue([
       var.region == "eu-de",
       var.region == "us-south",
       var.region == "eu-gb",
       var.region == "jp-tok",
       var.region == "au-syd",
       var.region == "us-east"
-    ]))
+    ])
     error_message = "Region must be specified and set to one of the permitted values (\"eu-de\", \"eu-gb\", \"jp-tok\", \"au-syd\", \"us-east\", \"us-south\") when provisioning a new instance."
   }
 }
@@ -65,39 +65,33 @@ variable "existing_watsonx_assistant_instance_crn" {
   default     = null
 }
 
-variable "existing_watsonx_assistant_instance_name" {
-  description = "The name of an existing watsonx Assistant instance."
+variable "plan" {
+  description = "The plan that is required to provision the watsonx Assistant instance. For `Trial` and `Lite` accounts, the `service_endpoints` value is ignored and the default service configuration is applied."
   type        = string
-  default     = null
-}
-
-variable "watsonx_assistant_plan" {
-  description = "The plan that is required to provision the watsonx Assistant instance. For `Trial` and `Lite` accounts, the `watsonx_assistant_service_endpoints` value is ignored and the default service configuration is applied."
-  type        = string
-  default     = null
+  default     = "plus-trial"
 
   validation {
-    condition     = var.existing_watsonx_assistant_instance_crn != null || var.watsonx_assistant_plan != null
+    condition     = var.existing_watsonx_assistant_instance_crn != null || var.plan != null
     error_message = "watsonx Assistant plan must be provided when creating a new instance."
   }
   validation {
     condition = anytrue([
-      var.watsonx_assistant_plan == "plus-trial", #  Refers to Trial Account
-      var.watsonx_assistant_plan == "free",       # Refers to Lite account
-      var.watsonx_assistant_plan == "plus",
-      var.watsonx_assistant_plan == "enterprise",
-      var.watsonx_assistant_plan == "enterprisedataisolation",
+      var.plan == "plus-trial", #  Refers to Trial Account
+      var.plan == "free",       # Refers to Lite account
+      var.plan == "plus",
+      var.plan == "enterprise",
+      var.plan == "enterprisedataisolation",
     ]) || var.existing_watsonx_assistant_instance_crn != null
     error_message = "A new watsonx Assistant instance requires a \"Trial\", \"Lite\", \"Plus\", \"Enterprise\", or \"Enterprise with Data Isolation\" plan. [Learn more](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-admin-managing-plan)."
   }
 }
 
-variable "watsonx_assistant_service_endpoints" {
-  description = "Types of the service endpoints that can be set to a watsonx Assistant instance. Possible values are : public, private or public-and-private."
+variable "service_endpoints" {
+  description = "Types of the service endpoints that can be set to a watsonx Assistant instance. Possible values are : public, private or public-and-private. For `Trial` and `Lite` accounts, the value is ignored and the default service configuration is applied."
   type        = string
-  default     = "public"
+  default     = "public-and-private"
   validation {
-    condition     = contains(["public", "public-and-private", "private"], var.watsonx_assistant_service_endpoints)
+    condition     = contains(["public", "public-and-private", "private"], var.service_endpoints)
     error_message = "The specified service endpoint is not valid. Supported options are \"public\", \"private\", \"public-and-private\"."
   }
 }
