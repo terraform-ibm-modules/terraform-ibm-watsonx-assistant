@@ -7,7 +7,7 @@ variable "resource_group_id" {
   type        = string
   default     = null
   validation {
-    condition     = var.existing_watsonx_assistant_instance_crn != null || var.resource_group_id != null
+    condition     = var.existing_watsonx_assistant_instance_crn == null ? length(var.resource_group_id) > 0 : true
     error_message = "You must specify a value for \"resource_group_id\" if \"existing_watsonx_assistant_instance_crn\" is null."
   }
 }
@@ -54,7 +54,7 @@ variable "watsonx_assistant_name" {
   type        = string
   default     = null
   validation {
-    condition     = var.existing_watsonx_assistant_instance_crn != null || var.watsonx_assistant_name != null
+    condition     = var.existing_watsonx_assistant_instance_crn == null ? length(var.watsonx_assistant_name) > 0 : true
     error_message = "watsonx Assistant name must be provided when creating a new instance."
   }
 }
