@@ -3,22 +3,30 @@
 ########################################################################################################################
 
 variable "resource_group_id" {
-  description = "The Id of an IBM Cloud resource group where the watsonx Assistant instance will be grouped. Required when creating a new instance."
+  description = "The resource group ID where the watsonx Assistant instance will be grouped. Required when creating a new instance."
   type        = string
   default     = null
   validation {
-    condition     = var.existing_watsonx_assistant_instance_crn != null || var.resource_group_id != null
-    error_message = "Resource group id must be provided when existing_watsonx_assistant_instance_crn is not set."
+    condition     = var.existing_watsonx_assistant_instance_crn == null ? length(var.resource_group_id) > 0 : true
+    error_message = "You must specify a value for \"resource_group_id\" if \"existing_watsonx_assistant_instance_crn\" is null."
   }
 }
 
 variable "region" {
-  description = "IBM Cloud region where the watsonx Assistant instance will be created. Required if creating a new instance."
+  description = "Region where the watsonx Assistant instance will be provisioned. Required if creating a new instance."
   type        = string
-  default     = null
+  default     = "us-south"
+
   validation {
-    condition     = var.existing_watsonx_assistant_instance_crn != null || var.region != null
-    error_message = "Region must be provided when existing_watsonx_assistant_instance_crn is not set."
+    condition = var.existing_watsonx_assistant_instance_crn != null || anytrue([
+      var.region == "eu-de",
+      var.region == "us-south",
+      var.region == "eu-gb",
+      var.region == "jp-tok",
+      var.region == "au-syd",
+      var.region == "us-east"
+    ])
+    error_message = "Region must be specified and set to one of the permitted values (\"eu-de\", \"eu-gb\", \"jp-tok\", \"au-syd\", \"us-east\", \"us-south\") when provisioning a new instance."
   }
   validation {
     condition     = var.region == null || contains(["eu-de", "us-south", "eu-gb", "jp-tok", "au-syd", "us-east"], var.region)
@@ -26,16 +34,15 @@ variable "region" {
   }
 }
 
-
 variable "resource_tags" {
-  description = "Metadata labels describing this watsonx Assistant instance."
+  description = "Optional list of tags to describe the watsonx Assistant instance."
   type        = list(string)
   default     = []
 }
 
 variable "access_tags" {
   type        = list(string)
-  description = "A list of access tags to apply to the watsonx Assistance instance created by the module. For more information, see https://cloud.ibm.com/docs/account?topic=account-access-tags-tutorial."
+  description = "A list of access tags to apply to the watsonx Assistant instance created by the module. For more information, see https://cloud.ibm.com/docs/account?topic=account-access-tags-tutorial."
   default     = []
 
   validation {
@@ -51,49 +58,44 @@ variable "watsonx_assistant_name" {
   type        = string
   default     = null
   validation {
-    condition     = var.existing_watsonx_assistant_instance_crn != null || var.watsonx_assistant_name != null
-    error_message = "watsonx Assistant name must be provided when existing_watsonx_assistant_instance_crn is not set."
+    condition     = var.existing_watsonx_assistant_instance_crn == null ? length(var.watsonx_assistant_name) > 0 : true
+    error_message = "watsonx Assistant name must be provided when creating a new instance."
   }
 }
 
 variable "existing_watsonx_assistant_instance_crn" {
-  description = "CRN of the an existing watsonx Assistant instance."
+  description = "The CRN of an existing watsonx Assistant instance."
   type        = string
   default     = null
 }
 
-variable "existing_watsonx_assistant_instance_name" {
-  description = "The name of an existing watsonx Assistant instance."
+variable "plan" {
+  description = "The plan that is required to provision the watsonx Assistant instance. For `Trial` and `Lite` accounts, the `service_endpoints` value is ignored and the default service configuration is applied."
   type        = string
-  default     = null
-}
+  default     = "plus-trial"
 
-variable "watsonx_assistant_plan" {
-  description = "The plan that is required to provision the watsonx Assistant instance."
-  type        = string
-  default     = "trial"
+  validation {
+    condition     = var.existing_watsonx_assistant_instance_crn != null || var.plan != null
+    error_message = "watsonx Assistant plan must be provided when creating a new instance."
+  }
   validation {
     condition = anytrue([
-      var.watsonx_assistant_plan == "trial",
-      var.watsonx_assistant_plan == "lite",
-      var.watsonx_assistant_plan == "plus",
-      var.watsonx_assistant_plan == "enterprise",
-      var.watsonx_assistant_plan == "enterprisedataisolation",
-    ])
-    error_message = "You must use a Trial, Lite, Plus, Enterprise, or Enterprise with data isolation plan. [Learn more](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-admin-managing-plan)."
-  }
-  validation {
-    condition     = !(contains(["trial", "lite"], var.watsonx_assistant_plan) && var.watsonx_assistant_service_endpoints != "public")
-    error_message = "The 'Trial' and 'Lite' plans only support public endpoints."
+      var.plan == "plus-trial", #  Refers to Trial Account
+      var.plan == "free",       # Refers to Lite account
+      var.plan == "plus",
+      var.plan == "enterprise",
+      var.plan == "enterprisedataisolation",
+    ]) || var.existing_watsonx_assistant_instance_crn != null
+    error_message = "A new watsonx Assistant instance requires a \"Trial\", \"Lite\", \"Plus\", \"Enterprise\", or \"Enterprise with Data Isolation\" plan. [Learn more](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-admin-managing-plan)."
   }
 }
 
-variable "watsonx_assistant_service_endpoints" {
-  description = "The type of service endpoints. Possible values: 'public', 'private', 'public-and-private'."
+variable "service_endpoints" {
+  description = "Types of the service endpoints that can be set to a watsonx Assistant instance. Possible values are : public, private or public-and-private. For `Trial` and `Lite` accounts, the value is ignored and the default service configuration is applied."
   type        = string
-  default     = "public"
+  default     = "public-and-private"
   validation {
-    condition     = contains(["public", "public-and-private", "private"], var.watsonx_assistant_service_endpoints)
-    error_message = "The specified service endpoint is not valid. Supported options are public, public-and-private, or private."
+    condition     = contains(["public", "public-and-private", "private"], var.service_endpoints)
+    error_message = "The specified service endpoint is not valid. Supported options are \"public\", \"private\", \"public-and-private\"."
   }
 }

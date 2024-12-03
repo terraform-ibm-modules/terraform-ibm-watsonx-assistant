@@ -17,7 +17,7 @@ module "watsonx_assistant" {
   source                 = "../../"
   resource_group_id      = module.resource_group.resource_group_id
   watsonx_assistant_name = var.prefix != null ? "${var.prefix}-${var.name}" : var.name
-  watsonx_assistant_plan = var.plan
+  plan                   = var.plan
   region                 = var.region
   access_tags            = var.access_tags
   resource_tags          = var.resource_tags

@@ -3,7 +3,6 @@
 ##############################################################################
 
 locals {
-  watsonx_assistant_id            = var.existing_watsonx_assistant_instance_crn != null ? data.ibm_resource_instance.existing_assistant_instance[0].id : ibm_resource_instance.watsonx_assistant_instance[0].id
   watsonx_assistant_crn           = var.existing_watsonx_assistant_instance_crn != null ? data.ibm_resource_instance.existing_assistant_instance[0].crn : ibm_resource_instance.watsonx_assistant_instance[0].crn
   watsonx_assistant_guid          = var.existing_watsonx_assistant_instance_crn != null ? data.ibm_resource_instance.existing_assistant_instance[0].guid : ibm_resource_instance.watsonx_assistant_instance[0].guid
   watsonx_assistant_name          = var.existing_watsonx_assistant_instance_crn != null ? data.ibm_resource_instance.existing_assistant_instance[0].resource_name : ibm_resource_instance.watsonx_assistant_instance[0].resource_name
@@ -19,12 +18,12 @@ data "ibm_resource_instance" "existing_assistant_instance" {
 resource "ibm_resource_instance" "watsonx_assistant_instance" {
   count             = var.existing_watsonx_assistant_instance_crn != null ? 0 : 1
   resource_group_id = var.resource_group_id
-  name              = var.existing_watsonx_assistant_instance_name != null ? var.existing_watsonx_assistant_instance_name : var.watsonx_assistant_name
+  name              = var.watsonx_assistant_name
   location          = var.region
   service           = "conversation"
-  plan              = var.watsonx_assistant_plan
+  plan              = var.plan
   tags              = var.resource_tags
-  service_endpoints = var.watsonx_assistant_service_endpoints
+  service_endpoints = var.service_endpoints
 
   timeouts {
     create = "15m"
@@ -39,7 +38,7 @@ resource "ibm_resource_instance" "watsonx_assistant_instance" {
 
 resource "ibm_resource_tag" "watsonx_assistant_tag" {
   count       = length(var.access_tags) == 0 ? 0 : 1
-  resource_id = var.existing_watsonx_assistant_instance_crn != null ? var.existing_watsonx_assistant_instance_crn : ibm_resource_instance.watsonx_assistant_instance[0].crn
+  resource_id = local.watsonx_assistant_crn
   tags        = var.access_tags
   tag_type    = "access"
 }

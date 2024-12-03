@@ -130,15 +130,15 @@
               {
                 "key": "plan",
                 "required": true,
-                "default_value": "trial",
+                "default_value": "plus-trial",
                 "options": [
                   {
                     "displayname": "Trial",
-                    "value": "trial"
+                    "value": "plus-trial"
                   },
                   {
                     "displayname": "Lite",
-                    "value": "lite"
+                    "value": "free"
                   },
                   {
                     "displayname": "Plus",
@@ -161,7 +161,7 @@
                 "key": "access_tags"
               },
               {
-                "key": "plan",
+                "key": "service_endpoints",
                 "required": true,
                 "default_value": "public",
                 "options": [

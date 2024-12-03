@@ -43,7 +43,7 @@ variable "region" {
 variable "plan" {
   type        = string
   description = "The plan that is required to provision the watsonx Assistant instance. [Learn more](https://www.ibm.com/products/watsonx-assistant/pricing)."
-  default     = "trial"
+  default     = "plus-trial"
 }
 
 variable "resource_tags" {
