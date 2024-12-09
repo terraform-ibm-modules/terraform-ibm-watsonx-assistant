@@ -76,7 +76,7 @@ You need the following permissions to run this module:
 
 * Account Management
   * **Resource Group**
-        - `Administrator` role
+        - `Viewer` role
 * IAM Services
   * **watsonx Assistant** service
         - `Editor` platform access
@@ -143,13 +143,13 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_access_tags"></a> [access\_tags](#input\_access\_tags) | A list of access tags to apply to the watsonx Assistant instance created by the module. For more information, see https://cloud.ibm.com/docs/account?topic=account-access-tags-tutorial. | `list(string)` | `[]` | no |
-| <a name="input_existing_watsonx_assistant_instance_crn"></a> [existing\_watsonx\_assistant\_instance\_crn](#input\_existing\_watsonx\_assistant\_instance\_crn) | The CRN of an existing watsonx Assistant instance. | `string` | `null` | no |
-| <a name="input_plan"></a> [plan](#input\_plan) | The plan that is required to provision the watsonx Assistant instance. For `Trial` and `Lite` accounts, the `service_endpoints` value is ignored and the default service configuration is applied. | `string` | `"plus-trial"` | no |
+| <a name="input_access_tags"></a> [access\_tags](#input\_access\_tags) | A list of access tags to apply to the watsonx Assistant instance. For more information, see https://cloud.ibm.com/docs/account?topic=account-access-tags-tutorial. | `list(string)` | `[]` | no |
+| <a name="input_existing_watsonx_assistant_instance_crn"></a> [existing\_watsonx\_assistant\_instance\_crn](#input\_existing\_watsonx\_assistant\_instance\_crn) | The CRN of an existing watsonx Assistant instance.If not provided, a new instance will be provisioned. | `string` | `null` | no |
+| <a name="input_plan"></a> [plan](#input\_plan) | The plan that is required to provision the watsonx Assistant instance. Possible values are: plus-trial, free, plus, enterprise, enterprisedataisolation. For 'Trial' and 'Lite' accounts, the `service_endpoints` value is ignored and the default service configuration is applied. | `string` | `"plus-trial"` | no |
 | <a name="input_region"></a> [region](#input\_region) | Region where the watsonx Assistant instance will be provisioned. Required if creating a new instance. | `string` | `"us-south"` | no |
 | <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The resource group ID where the watsonx Assistant instance will be grouped. Required when creating a new instance. | `string` | `null` | no |
-| <a name="input_resource_tags"></a> [resource\_tags](#input\_resource\_tags) | Optional list of tags to describe the watsonx Assistant instance. | `list(string)` | `[]` | no |
-| <a name="input_service_endpoints"></a> [service\_endpoints](#input\_service\_endpoints) | Types of the service endpoints that can be set to a watsonx Assistant instance. Possible values are : public, private or public-and-private. For `Trial` and `Lite` accounts, the value is ignored and the default service configuration is applied. | `string` | `"public-and-private"` | no |
+| <a name="input_resource_tags"></a> [resource\_tags](#input\_resource\_tags) | Optional list of tags to describe the watsonx Assistant instance created by the module. | `list(string)` | `[]` | no |
+| <a name="input_service_endpoints"></a> [service\_endpoints](#input\_service\_endpoints) | Types of the service endpoints that can be set to a watsonx Assistant instance. Possible values are : public, private or public-and-private. For 'Trial' and 'Lite' accounts, the value is ignored and the default service configuration is applied. | `string` | `"public-and-private"` | no |
 | <a name="input_watsonx_assistant_name"></a> [watsonx\_assistant\_name](#input\_watsonx\_assistant\_name) | The name of the watsonx Assistant instance. Required if creating a new instance. | `string` | `null` | no |
 
 ### Outputs

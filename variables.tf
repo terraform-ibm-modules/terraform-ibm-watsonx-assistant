@@ -8,7 +8,7 @@ variable "resource_group_id" {
   default     = null
   validation {
     condition     = var.existing_watsonx_assistant_instance_crn == null ? length(var.resource_group_id) > 0 : true
-    error_message = "You must specify a value for \"resource_group_id\" if \"existing_watsonx_assistant_instance_crn\" is null."
+    error_message = "You must specify a value for 'resource_group_id' if 'existing_watsonx_assistant_instance_crn' is null."
   }
 }
 
@@ -26,23 +26,19 @@ variable "region" {
       var.region == "au-syd",
       var.region == "us-east"
     ])
-    error_message = "Region must be specified and set to one of the permitted values (\"eu-de\", \"eu-gb\", \"jp-tok\", \"au-syd\", \"us-east\", \"us-south\") when provisioning a new instance."
-  }
-  validation {
-    condition     = var.region == null || contains(["eu-de", "us-south", "eu-gb", "jp-tok", "au-syd", "us-east"], var.region)
-    error_message = "You must specify one of 'eu-de', 'eu-gb', 'jp-tok', 'au-syd', 'us-east', or 'us-south' as the IBM Cloud region."
+    error_message = "Region must be specified and set to one of the permitted values ('eu-de', 'eu-gb', 'jp-tok', 'au-syd', 'us-east', 'us-south') when provisioning a new instance."
   }
 }
 
 variable "resource_tags" {
-  description = "Optional list of tags to describe the watsonx Assistant instance."
+  description = "Optional list of tags to describe the watsonx Assistant instance created by the module."
   type        = list(string)
   default     = []
 }
 
 variable "access_tags" {
   type        = list(string)
-  description = "A list of access tags to apply to the watsonx Assistant instance created by the module. For more information, see https://cloud.ibm.com/docs/account?topic=account-access-tags-tutorial."
+  description = "A list of access tags to apply to the watsonx Assistant instance. For more information, see https://cloud.ibm.com/docs/account?topic=account-access-tags-tutorial."
   default     = []
 
   validation {
@@ -64,13 +60,13 @@ variable "watsonx_assistant_name" {
 }
 
 variable "existing_watsonx_assistant_instance_crn" {
-  description = "The CRN of an existing watsonx Assistant instance."
+  description = "The CRN of an existing watsonx Assistant instance.If not provided, a new instance will be provisioned."
   type        = string
   default     = null
 }
 
 variable "plan" {
-  description = "The plan that is required to provision the watsonx Assistant instance. For `Trial` and `Lite` accounts, the `service_endpoints` value is ignored and the default service configuration is applied."
+  description = "The plan that is required to provision the watsonx Assistant instance. Possible values are: plus-trial, free, plus, enterprise, enterprisedataisolation. For 'Trial' and 'Lite' accounts, the `service_endpoints` value is ignored and the default service configuration is applied."
   type        = string
   default     = "plus-trial"
 
@@ -86,16 +82,16 @@ variable "plan" {
       var.plan == "enterprise",
       var.plan == "enterprisedataisolation",
     ]) || var.existing_watsonx_assistant_instance_crn != null
-    error_message = "A new watsonx Assistant instance requires a \"Trial\", \"Lite\", \"Plus\", \"Enterprise\", or \"Enterprise with Data Isolation\" plan. [Learn more](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-admin-managing-plan)."
+    error_message = "A new watsonx Assistant instance requires a 'Trial', 'Lite', 'Plus', 'Enterprise', or 'Enterprise with Data Isolation' plan. [Learn more](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-admin-managing-plan)."
   }
 }
 
 variable "service_endpoints" {
-  description = "Types of the service endpoints that can be set to a watsonx Assistant instance. Possible values are : public, private or public-and-private. For `Trial` and `Lite` accounts, the value is ignored and the default service configuration is applied."
+  description = "Types of the service endpoints that can be set to a watsonx Assistant instance. Possible values are : public, private or public-and-private. For 'Trial' and 'Lite' accounts, the value is ignored and the default service configuration is applied."
   type        = string
   default     = "public-and-private"
   validation {
     condition     = contains(["public", "public-and-private", "private"], var.service_endpoints)
-    error_message = "The specified service endpoint is not valid. Supported options are \"public\", \"private\", \"public-and-private\"."
+    error_message = "The specified service endpoint is not valid. Supported options are 'public', 'private', 'public-and-private'."
   }
 }
