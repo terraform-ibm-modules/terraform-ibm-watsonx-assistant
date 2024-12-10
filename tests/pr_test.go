@@ -111,7 +111,7 @@ func TestRunExistingResourcesExample(t *testing.T) {
 	if existErr != nil {
 		assert.True(t, existErr == nil, "Init and Apply of temp existing resource failed")
 	} else {
-		outputs, err := terraform.OutputAllE(t, existingTerraformOptions) //options.TerraformOptions)
+		outputs, err := terraform.OutputAllE(t, existingTerraformOptions)
 		require.NoError(t, err, "Failed to retrieve Terraform outputs")
 		expectedOutputs := []string{"crn", "guid", "name", "plan_id", "dashboard_url"}
 		_, tfOutputsErr := testhelper.ValidateTerraformOutputs(outputs, expectedOutputs...)
