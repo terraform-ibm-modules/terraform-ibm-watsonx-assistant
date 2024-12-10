@@ -6,6 +6,7 @@ output "crn" {
   description = "CRN of the existing watsonx Assistant instance."
   value       = module.existing_watsonx_assistant_instance.crn
 }
+
 output "name" {
   description = "Name of the existing watsonx Assistant instance"
   value       = module.existing_watsonx_assistant_instance.name

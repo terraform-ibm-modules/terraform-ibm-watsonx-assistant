@@ -81,10 +81,7 @@ func TestRunUpgradeExample(t *testing.T) {
 func TestRunExistingResourcesExample(t *testing.T) {
 	t.Parallel()
 
-	// ------------------------------------------------------------------------------------
 	// Provision watsonx Assistant instance
-	// ------------------------------------------------------------------------------------
-
 	prefix := fmt.Sprintf("ex-assistant-%s", strings.ToLower(random.UniqueId()))
 	realTerraformDir := ".."
 	tempTerraformDir, _ := files.CopyTerraformFolderToTemp(realTerraformDir, fmt.Sprintf(prefix+"-%s", strings.ToLower(random.UniqueId())))
