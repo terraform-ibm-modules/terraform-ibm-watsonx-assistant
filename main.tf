@@ -3,6 +3,7 @@
 ##############################################################################
 
 locals {
+  watsonx_assistant_id            = var.existing_watsonx_assistant_instance_crn != null ? data.ibm_resource_instance.existing_assistant_instance[0].id : ibm_resource_instance.watsonx_assistant_instance[0].account_id
   watsonx_assistant_crn           = var.existing_watsonx_assistant_instance_crn != null ? data.ibm_resource_instance.existing_assistant_instance[0].crn : ibm_resource_instance.watsonx_assistant_instance[0].crn
   watsonx_assistant_guid          = var.existing_watsonx_assistant_instance_crn != null ? data.ibm_resource_instance.existing_assistant_instance[0].guid : ibm_resource_instance.watsonx_assistant_instance[0].guid
   watsonx_assistant_name          = var.existing_watsonx_assistant_instance_crn != null ? data.ibm_resource_instance.existing_assistant_instance[0].resource_name : ibm_resource_instance.watsonx_assistant_instance[0].resource_name

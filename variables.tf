@@ -66,7 +66,7 @@ variable "existing_watsonx_assistant_instance_crn" {
 }
 
 variable "plan" {
-  description = "The plan that is required to provision the watsonx Assistant instance. Possible values are: plus-trial, free, plus, enterprise, enterprisedataisolation. For 'Trial' and 'Lite' accounts, the `service_endpoints` value is ignored and the default service configuration is applied."
+  description = "The plan that is required to provision the watsonx Assistant instance. Possible values are: plus-trial, free, plus, enterprise, enterprisedataisolation. For 'plus-trial' and 'free' plans, the `service_endpoints` value is ignored and the default service configuration is applied."
   type        = string
   default     = "plus-trial"
 
@@ -82,12 +82,12 @@ variable "plan" {
       var.plan == "enterprise",
       var.plan == "enterprisedataisolation",
     ]) || var.existing_watsonx_assistant_instance_crn != null
-    error_message = "A new watsonx Assistant instance requires a 'Trial', 'Lite', 'Plus', 'Enterprise', or 'Enterprise with Data Isolation' plan. [Learn more](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-admin-managing-plan)."
+    error_message = "A new watsonx Assistant instance requires a 'plus-trial', 'free', 'plus', 'enterprise', or 'enterprisedataisolation' plan. [Learn more](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-admin-managing-plan)."
   }
 }
 
 variable "service_endpoints" {
-  description = "Types of the service endpoints that can be set to a watsonx Assistant instance. Possible values are : public, private or public-and-private. For 'Trial' and 'Lite' accounts, the value is ignored and the default service configuration is applied."
+  description = "Types of the service endpoints that can be set to a watsonx Assistant instance. Possible values are : public, private or public-and-private. For 'plus-trial' and 'free plans', the value is ignored and the default service configuration is applied."
   type        = string
   default     = "public-and-private"
   validation {

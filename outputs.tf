@@ -2,6 +2,11 @@
 # Outputs
 ########################################################################################################################
 
+output "account_id" {
+  description = "Account ID of the watsonx Assistant instance."
+  value       = local.watsonx_assistant_id
+}
+
 output "crn" {
   description = "The CRN of the watsonx Assistant instance."
   value       = local.watsonx_assistant_crn
