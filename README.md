@@ -129,7 +129,9 @@ statement instead the previous block.
 
 ### Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_crn_parser"></a> [crn\_parser](#module\_crn\_parser) | terraform-ibm-modules/common-utilities/ibm//modules/crn-parser | 1.1.0 |
 
 ### Resources
 
@@ -160,6 +162,7 @@ No modules.
 | <a name="output_crn"></a> [crn](#output\_crn) | The CRN of the watsonx Assistant instance. |
 | <a name="output_dashboard_url"></a> [dashboard\_url](#output\_dashboard\_url) | The dashboard URL of the watsonx Assistant instance. |
 | <a name="output_guid"></a> [guid](#output\_guid) | The GUID of the watsonx Assistant instance. |
+| <a name="output_id"></a> [id](#output\_id) | ID of the watsonx Assistant instance. |
 | <a name="output_name"></a> [name](#output\_name) | The name of the watsonx Assistant instance. |
 | <a name="output_plan_id"></a> [plan\_id](#output\_plan\_id) | The plan ID of the watsonx Assistant instance. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

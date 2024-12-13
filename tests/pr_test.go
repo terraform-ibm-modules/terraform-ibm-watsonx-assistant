@@ -113,7 +113,7 @@ func TestRunExistingResourcesExample(t *testing.T) {
 	} else {
 		outputs, err := terraform.OutputAllE(t, existingTerraformOptions)
 		require.NoError(t, err, "Failed to retrieve Terraform outputs")
-		expectedOutputs := []string{"account_id", "crn", "guid", "name", "plan_id", "dashboard_url"}
+		expectedOutputs := []string{"account_id", "id", "crn", "guid", "name", "plan_id", "dashboard_url"}
 		_, tfOutputsErr := testhelper.ValidateTerraformOutputs(outputs, expectedOutputs...)
 		if assert.Nil(t, tfOutputsErr, tfOutputsErr) {
 			options := testhelper.TestOptionsDefault(&testhelper.TestOptions{

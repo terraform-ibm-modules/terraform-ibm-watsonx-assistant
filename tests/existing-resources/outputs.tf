@@ -7,6 +7,11 @@ output "account_id" {
   value       = module.watsonx_assistant.account_id
 }
 
+output "id" {
+  description = "ID of the watsonx Assistant instance."
+  value       = module.watsonx_assistant.id
+}
+
 output "crn" {
   description = "CRN of the existing watsonx Assistant instance"
   value       = module.watsonx_assistant.crn
