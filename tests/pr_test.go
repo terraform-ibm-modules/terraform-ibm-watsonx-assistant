@@ -12,7 +12,6 @@ import (
 	"github.com/gruntwork-io/terratest/modules/logger"
 	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/terraform"
-
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
@@ -82,10 +81,7 @@ func TestRunUpgradeExample(t *testing.T) {
 func TestRunExistingResourcesExample(t *testing.T) {
 	t.Parallel()
 
-	// ------------------------------------------------------------------------------------
 	// Provision watsonx Assistant instance
-	// ------------------------------------------------------------------------------------
-
 	prefix := fmt.Sprintf("ex-assistant-%s", strings.ToLower(random.UniqueId()))
 	realTerraformDir := ".."
 	tempTerraformDir, _ := files.CopyTerraformFolderToTemp(realTerraformDir, fmt.Sprintf(prefix+"-%s", strings.ToLower(random.UniqueId())))
@@ -115,19 +111,24 @@ func TestRunExistingResourcesExample(t *testing.T) {
 	if existErr != nil {
 		assert.True(t, existErr == nil, "Init and Apply of temp existing resource failed")
 	} else {
-		options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
-			Testing:      t,
-			TerraformDir: existingExampleDir,
-			// Do not hard fail the test if the implicit destroy steps fail to allow a full destroy of resource to occur
-			ImplicitRequired: false,
-			TerraformVars: map[string]interface{}{
-				"existing_watsonx_assistant_instance_crn": terraform.Output(t, existingTerraformOptions, "crn"),
-			},
-		})
-
-		output, err := options.RunTestConsistency()
-		assert.Nil(t, err, "This should not have errored")
-		assert.NotNil(t, output, "Expected some output")
+		outputs, err := terraform.OutputAllE(t, existingTerraformOptions)
+		require.NoError(t, err, "Failed to retrieve Terraform outputs")
+		expectedOutputs := []string{"account_id", "id", "crn", "guid", "name", "plan_id", "dashboard_url"}
+		_, tfOutputsErr := testhelper.ValidateTerraformOutputs(outputs, expectedOutputs...)
+		if assert.Nil(t, tfOutputsErr, tfOutputsErr) {
+			options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
+				Testing:      t,
+				TerraformDir: existingExampleDir,
+				// Do not hard fail the test if the implicit destroy steps fail to allow a full destroy of resource to occur
+				ImplicitRequired: false,
+				TerraformVars: map[string]interface{}{
+					"existing_watsonx_assistant_instance_crn": terraform.Output(t, existingTerraformOptions, "crn"),
+				},
+			})
+			output, err := options.RunTestConsistency()
+			assert.Nil(t, err, "This should not have errored")
+			assert.NotNil(t, output, "Expected some output")
+		}
 	}
 
 	// Check if "DO_NOT_DESTROY_ON_FAILURE" is set
