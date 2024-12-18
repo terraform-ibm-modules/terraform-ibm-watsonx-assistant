@@ -37,23 +37,26 @@ variable "region" {
   default     = "us-south"
 }
 
-##############################################################################
-# watsonx Assistant properties
-##############################################################################
 variable "plan" {
   type        = string
-  description = "The plan that is required to provision the watsonx Assistant instance. [Learn more](https://www.ibm.com/products/watsonx-assistant/pricing)."
+  description = "The plan that is required to provision the watsonx Assistant instance. Possible values are: plus-trial, free, plus, enterprise, enterprisedataisolation. For 'plus-trial' and 'free' plans, the `service_endpoints` value is ignored and the default service configuration is applied. [Learn more](https://www.ibm.com/products/watsonx-assistant/pricing)."
   default     = "plus-trial"
 }
 
 variable "resource_tags" {
   type        = list(string)
-  description = "Optional list of tags to be added to the watsonx Assistant instance."
+  description = "Optional list of tags to describe the newly created watsonx Assistant instance."
   default     = []
 }
 
 variable "access_tags" {
   type        = list(string)
-  description = "A list of access tags to apply to the watsonx Assistant instance created by the solution. [Learn more](https://cloud.ibm.com/docs/account?topic=account-access-tags-tutorial)."
+  description = "A list of access tags to apply to the watsonx Assistant instance. [Learn more](https://cloud.ibm.com/docs/account?topic=account-access-tags-tutorial)."
   default     = []
+}
+
+variable "service_endpoints" {
+  description = "Types of the service endpoints that can be applied to a watsonx Assistant instance. Possible values are : public, private or public-and-private. For 'plus-trial' and 'free plans', the value is ignored and the default service configuration is applied."
+  type        = string
+  default     = "public-and-private"
 }
