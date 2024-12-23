@@ -3,7 +3,7 @@
 ########################################################################################################################
 
 output "account_id" {
-  description = "Account ID of the existing watsonx Assistant instance"
+  description = "Account ID of the watsonx Assistant instance"
   value       = module.watsonx_assistant.account_id
 }
 

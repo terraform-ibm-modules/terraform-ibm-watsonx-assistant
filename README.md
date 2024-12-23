@@ -19,7 +19,7 @@ For information, see "Module names and descriptions" at
 https://terraform-ibm-modules.github.io/documentation/#/implementation-guidelines?id=module-names-and-descriptions
 -->
 
-The IBM watsonx Assistant Terraform Module is designed to automate the deployment and configuration of the IBM watsonx Assistant, a next-generation conversational AI solution.
+The IBM watsonx Assistant Terraform module is designed to automate the deployment and configuration of the IBM watsonx Assistant, a next-generation conversational AI solution.
 
 For further information on IBM watsonx Assistant, including supported features, plans, and regions, please refer the official watsonx Assistant [documentation](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-welcome-new-assistant)
 
@@ -29,7 +29,7 @@ For further information on IBM watsonx Assistant, including supported features, 
 * [terraform-ibm-watsonx-assistant](#terraform-ibm-watsonx-assistant)
 * [Examples](./examples)
     * [Basic example](./examples/basic)
-    * [Existing Instance example](./examples/existing-instance)
+    * [Existing instance example](./examples/existing-instance)
 * [Contributing](#contributing)
 <!-- END OVERVIEW HOOK -->
 
