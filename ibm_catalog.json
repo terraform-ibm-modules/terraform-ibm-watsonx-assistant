@@ -2,7 +2,7 @@
   "products": [
     {
       "name": "deploy-arch-ibm-watsonx-assistant",
-      "label": "watsonx Assistant",
+      "label": "Cloud automation for watsonx Assistant",
       "product_kind": "solution",
       "tags": [
         "ibm_created",
@@ -146,10 +146,6 @@
                   {
                     "displayname": "Enterprise",
                     "value": "enterprise"
-                  },
-                  {
-                    "displayname": "Enterprise with data isolation",
-                    "value": "enterprisedataisolation"
                   }
                 ]
               },

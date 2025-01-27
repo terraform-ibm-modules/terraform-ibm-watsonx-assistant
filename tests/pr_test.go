@@ -173,6 +173,7 @@ func TestRunStandardSolution(t *testing.T) {
 		"plan":                "free",
 		"service_endpoints":   "public",
 		"resource_group_name": options.Prefix,
+		"provider_visibility": "public",
 	}
 
 	output, err := options.RunTestConsistency()
@@ -195,6 +196,7 @@ func TestRunStandardUpgradeSolution(t *testing.T) {
 		"plan":                "free",
 		"service_endpoints":   "public",
 		"resource_group_name": options.Prefix,
+		"provider_visibility": "public",
 	}
 
 	output, err := options.RunTestUpgrade()
