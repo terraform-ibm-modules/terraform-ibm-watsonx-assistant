@@ -22,6 +22,16 @@ output "name" {
   value       = module.watsonx_assistant.name
 }
 
+output "plan_id" {
+  description = "Plan ID of the existing watsonx Assistant instance."
+  value       = module.watsonx_assistant.plan_id
+}
+
+output "dashboard_url" {
+  description = "Dashboard URL of the existing watsonx Assistant instance."
+  value       = module.watsonx_assistant.dashboard_url
+}
+
 output "resource_group_id" {
   description = "The resource group ID to provision the watsonx assistant instance."
   value       = module.resource_group.resource_group_id
