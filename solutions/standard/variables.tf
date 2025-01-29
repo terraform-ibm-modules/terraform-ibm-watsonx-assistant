@@ -8,6 +8,17 @@ variable "ibmcloud_api_key" {
   sensitive   = true
 }
 
+variable "provider_visibility" {
+  description = "Set the visibility value for the IBM terraform provider. Supported values are `public`, `private`, `public-and-private`. [Learn more](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/guides/custom-service-endpoints)."
+  type        = string
+  default     = "private"
+
+  validation {
+    condition     = contains(["public", "private", "public-and-private"], var.provider_visibility)
+    error_message = "Invalid visibility option. Allowed values are 'public', 'private', or 'public-and-private'."
+  }
+}
+
 variable "use_existing_resource_group" {
   type        = bool
   description = "Whether to use an existing resource group."
@@ -21,14 +32,14 @@ variable "resource_group_name" {
 
 variable "prefix" {
   type        = string
-  description = "Prefix to add to all resources created by this solution."
-  default     = null
+  description = "(Optional) Prefix to add to all resources created by this solution. To not use any prefix value, you can set this value to `null` or an empty string."
+  default     = "watsonx"
 }
 
 variable "name" {
   type        = string
   description = "The name of the watsonx Assistant instance. If a prefix input variable is specified, the prefix is added to the name in the `<prefix>-<name>` format."
-  default     = "watsonx-assistant"
+  default     = "assistant"
 }
 
 variable "region" {
@@ -39,8 +50,8 @@ variable "region" {
 
 variable "plan" {
   type        = string
-  description = "The plan that is required to provision the watsonx Assistant instance. Possible values are: plus-trial, free, plus, enterprise, enterprisedataisolation. For 'plus-trial' and 'free' plans, the `service_endpoints` value is ignored and the default service configuration is applied. [Learn more](https://www.ibm.com/products/watsonx-assistant/pricing)."
-  default     = "plus-trial"
+  description = "The plan that is required to provision the watsonx Assistant instance. Possible values are: plus-trial, free, plus, enterprise. For 'plus-trial' and 'free' plans, the `service_endpoints` value is ignored and the default service configuration is applied. [Learn more](https://www.ibm.com/products/watsonx-assistant/pricing)."
+  default     = "enterprise"
 }
 
 variable "resource_tags" {

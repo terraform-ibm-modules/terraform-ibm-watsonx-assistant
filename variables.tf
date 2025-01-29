@@ -66,7 +66,7 @@ variable "existing_watsonx_assistant_instance_crn" {
 }
 
 variable "plan" {
-  description = "The plan that is required to provision the watsonx Assistant instance. Possible values are: plus-trial, free, plus, enterprise, enterprisedataisolation. For 'plus-trial' and 'free' plans, the `service_endpoints` value is ignored and the default service configuration is applied."
+  description = "The plan that is required to provision the watsonx Assistant instance. Possible values are: plus-trial, free, plus, enterprise. For 'plus-trial' and 'free' plans, the `service_endpoints` value is ignored and the default service configuration is applied."
   type        = string
   default     = "plus-trial"
 
@@ -79,10 +79,9 @@ variable "plan" {
       var.plan == "plus-trial", #  Refers to Trial Account
       var.plan == "free",       # Refers to Lite account
       var.plan == "plus",
-      var.plan == "enterprise",
-      var.plan == "enterprisedataisolation",
+      var.plan == "enterprise"
     ]) || var.existing_watsonx_assistant_instance_crn != null
-    error_message = "A new watsonx Assistant instance requires a 'plus-trial', 'free', 'plus', 'enterprise', or 'enterprisedataisolation' plan. [Learn more](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-admin-managing-plan)."
+    error_message = "A new watsonx Assistant instance requires a 'plus-trial', 'free', 'plus' or 'enterprise' plan. [Learn more](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-admin-managing-plan)."
   }
 }
 
