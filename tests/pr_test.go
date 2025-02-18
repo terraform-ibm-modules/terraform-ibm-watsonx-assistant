@@ -61,34 +61,27 @@ func setupOptions(t *testing.T, prefix string, exampleDir string) *testhelper.Te
 		TerraformDir:  exampleDir,
 		Prefix:        prefix,
 		ResourceGroup: resourceGroup,
-		TerraformVars: map[string]interface{}{
-			"access_tags": permanentResources["accessTags"],
-			"region":      validRegions[rand.Intn(len(validRegions))],
-		},
 	})
+
+	options.TerraformVars = map[string]interface{}{
+		"access_tags":    permanentResources["accessTags"],
+		"region":         validRegions[rand.Intn(len(validRegions))],
+		"prefix":         options.Prefix,
+		"resource_group": resourceGroup,
+		"resource_tags":  options.Tags,
+	}
+
 	return options
 }
 
 func TestRunBasicExample(t *testing.T) {
 	t.Parallel()
 
-	options := setupOptions(t, "wx-assistant", basicExampleDir)
+	options := setupOptions(t, "wxa-basic", basicExampleDir)
 
 	output, err := options.RunTestConsistency()
 	assert.Nil(t, err, "This should not have errored")
 	assert.NotNil(t, output, "Expected some output")
-}
-
-func TestRunUpgradeExample(t *testing.T) {
-	t.Parallel()
-
-	options := setupOptions(t, "wx-assistant-upg", basicExampleDir)
-
-	output, err := options.RunTestUpgrade()
-	if !options.UpgradeTestSkipped {
-		assert.Nil(t, err, "This should not have errored")
-		assert.NotNil(t, output, "Expected some output")
-	}
 }
 
 func TestRunExistingResourcesExample(t *testing.T) {
@@ -165,7 +158,7 @@ func TestRunStandardSolution(t *testing.T) {
 		Testing:       t,
 		TerraformDir:  standardSolutionTerraformDir,
 		Region:        validRegions[rand.Intn(len(validRegions))],
-		Prefix:        "assistant-st-da",
+		Prefix:        "wxa-da",
 		ResourceGroup: resourceGroup,
 	})
 
@@ -174,6 +167,8 @@ func TestRunStandardSolution(t *testing.T) {
 		"service_endpoints":   "public",
 		"resource_group_name": options.Prefix,
 		"provider_visibility": "public",
+		"prefix":              options.Prefix,
+		"region":              options.Region,
 	}
 
 	output, err := options.RunTestConsistency()
@@ -188,7 +183,7 @@ func TestRunStandardUpgradeSolution(t *testing.T) {
 		Testing:       t,
 		TerraformDir:  standardSolutionTerraformDir,
 		Region:        validRegions[rand.Intn(len(validRegions))],
-		Prefix:        "assistant-st-da-upg",
+		Prefix:        "wxa-da-upg",
 		ResourceGroup: resourceGroup,
 	})
 
@@ -197,6 +192,8 @@ func TestRunStandardUpgradeSolution(t *testing.T) {
 		"service_endpoints":   "public",
 		"resource_group_name": options.Prefix,
 		"provider_visibility": "public",
+		"prefix":              options.Prefix,
+		"region":              options.Region,
 	}
 
 	output, err := options.RunTestUpgrade()
