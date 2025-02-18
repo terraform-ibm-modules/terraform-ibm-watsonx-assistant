@@ -158,7 +158,7 @@ func TestRunStandardSolution(t *testing.T) {
 		Testing:       t,
 		TerraformDir:  standardSolutionTerraformDir,
 		Region:        validRegions[rand.Intn(len(validRegions))],
-		Prefix:        "assistant-st-da",
+		Prefix:        "wxa-da",
 		ResourceGroup: resourceGroup,
 	})
 
@@ -183,7 +183,7 @@ func TestRunStandardUpgradeSolution(t *testing.T) {
 		Testing:       t,
 		TerraformDir:  standardSolutionTerraformDir,
 		Region:        validRegions[rand.Intn(len(validRegions))],
-		Prefix:        "assistant-st-da-upg",
+		Prefix:        "wxa-da-upg",
 		ResourceGroup: resourceGroup,
 	})
 
