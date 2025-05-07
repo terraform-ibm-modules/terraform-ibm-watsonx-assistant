@@ -85,7 +85,7 @@ variable "plan" {
 }
 
 variable "service_endpoints" {
-  description = "Types of the service endpoints that can be set to a watsonx Assistant instance. Possible values are : public, private or public-and-private. For  'free'  plan, the value is ignored and the default service configuration is applied."
+  description = "Types of the service endpoints that can be set to a watsonx Assistant instance. Possible values are : public, private or public-and-private. For 'free' plan, the value is ignored and the default service configuration is applied."
   type        = string
   default     = "public-and-private"
   validation {
