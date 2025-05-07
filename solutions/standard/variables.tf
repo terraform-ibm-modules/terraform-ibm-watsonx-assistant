@@ -50,7 +50,7 @@ variable "region" {
 
 variable "plan" {
   type        = string
-  description = "The plan that is required to provision the watsonx Assistant instance. Possible values are: free, plus, enterprise . For 'free' plan, the `service_endpoints` value is ignored and the default service configuration is applied. [Learn more](https://www.ibm.com/products/watsonx-assistant/pricing)."
+  description = "The plan that is required to provision the watsonx Assistant instance. Possible values are: free, plus, enterprise. For 'free' plan, the `service_endpoints` value is ignored and the default service configuration is applied. [Learn more](https://www.ibm.com/products/watsonx-assistant/pricing)."
   default     = "enterprise"
 }
 
