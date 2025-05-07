@@ -119,7 +119,6 @@
               {
                 "key": "region",
                 "required": true,
-                "default_value": "us-south",
                 "options": [
                   {
                     "displayname": "Dallas (us-south)",
@@ -172,7 +171,6 @@
               },
               {
                 "key": "service_endpoints",
-                "default_value": "public-and-private",
                 "options": [
                   {
                     "displayname": "Public Network",
