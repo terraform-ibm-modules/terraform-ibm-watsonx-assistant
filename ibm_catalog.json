@@ -149,12 +149,8 @@
               },
               {
                 "key": "plan",
-                "default_value": "plus-trial",
+                "default_value": "free",
                 "options": [
-                  {
-                    "displayname": "Trial",
-                    "value": "plus-trial"
-                  },
                   {
                     "displayname": "Lite",
                     "value": "free"

@@ -66,9 +66,9 @@ variable "existing_watsonx_assistant_instance_crn" {
 }
 
 variable "plan" {
-  description = "The plan that is required to provision the watsonx Assistant instance. Possible values are: plus-trial, free, plus, enterprise. For 'plus-trial' and 'free' plans, the `service_endpoints` value is ignored and the default service configuration is applied."
+  description = "The plan that is required to provision the watsonx Assistant instance. Possible values are: free, plus, enterprise . For 'free' plan, the `service_endpoints` value is ignored and the default service configuration is applied."
   type        = string
-  default     = "plus-trial"
+  default     = "free"
 
   validation {
     condition     = var.existing_watsonx_assistant_instance_crn != null || var.plan != null
@@ -76,17 +76,16 @@ variable "plan" {
   }
   validation {
     condition = anytrue([
-      var.plan == "plus-trial", #  Refers to Trial Account
-      var.plan == "free",       # Refers to Lite account
+      var.plan == "free", # Refers to Lite account
       var.plan == "plus",
-      var.plan == "enterprise"
+      var.plan == "enterprise",
     ]) || var.existing_watsonx_assistant_instance_crn != null
-    error_message = "A new watsonx Assistant instance requires a 'plus-trial', 'free', 'plus' or 'enterprise' plan. [Learn more](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-admin-managing-plan)."
+    error_message = "A new watsonx Assistant instance requires a 'free', 'plus' or 'enterprise' plan. [Learn more](https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-admin-managing-plan)."
   }
 }
 
 variable "service_endpoints" {
-  description = "Types of the service endpoints that can be set to a watsonx Assistant instance. Possible values are : public, private or public-and-private. For 'plus-trial' and 'free plans', the value is ignored and the default service configuration is applied."
+  description = "Types of the service endpoints that can be set to a watsonx Assistant instance. Possible values are : public, private or public-and-private. For  'free'  plan, the value is ignored and the default service configuration is applied."
   type        = string
   default     = "public-and-private"
   validation {

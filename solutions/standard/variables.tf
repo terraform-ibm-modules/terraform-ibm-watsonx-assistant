@@ -50,7 +50,7 @@ variable "region" {
 
 variable "plan" {
   type        = string
-  description = "The plan that is required to provision the watsonx Assistant instance. Possible values are: plus-trial, free, plus, enterprise. For 'plus-trial' and 'free' plans, the `service_endpoints` value is ignored and the default service configuration is applied. [Learn more](https://www.ibm.com/products/watsonx-assistant/pricing)."
+  description = "The plan that is required to provision the watsonx Assistant instance. Possible values are: free, plus, enterprise . For 'free' plan, the `service_endpoints` value is ignored and the default service configuration is applied. [Learn more](https://www.ibm.com/products/watsonx-assistant/pricing)."
   default     = "enterprise"
 }
 
@@ -67,7 +67,7 @@ variable "access_tags" {
 }
 
 variable "service_endpoints" {
-  description = "Types of the service endpoints that can be applied to a watsonx Assistant instance. Possible values are : public, private or public-and-private. For 'plus-trial' and 'free plans', the value is ignored and the default service configuration is applied."
+  description = "Types of the service endpoints that can be applied to a watsonx Assistant instance. Possible values are : public, private or public-and-private. For 'free' plan, the value is ignored and the default service configuration is applied."
   type        = string
   default     = "public-and-private"
 }
