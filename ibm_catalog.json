@@ -149,7 +149,6 @@
               },
               {
                 "key": "plan",
-                "default_value": "Plus",
                 "options": [
                   {
                     "displayname": "Lite",

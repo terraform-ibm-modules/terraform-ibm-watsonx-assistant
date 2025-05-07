@@ -66,7 +66,7 @@ variable "existing_watsonx_assistant_instance_crn" {
 }
 
 variable "plan" {
-  description = "The plan that is required to provision the watsonx Assistant instance. Possible values are: free, plus, enterprise . For 'free' plan, the `service_endpoints` value is ignored and the default service configuration is applied."
+  description = "The plan that is required to provision the watsonx Assistant instance. Possible values are: free, plus, enterprise. For 'free' plan, the `service_endpoints` value is ignored and the default service configuration is applied."
   type        = string
   default     = "free"
 

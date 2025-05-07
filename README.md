@@ -64,7 +64,7 @@ module "watsonx_assistant" {
   source                    = "terraform-ibm-modules/watsonx-assistant/ibm"
   region                    = "us-south"
   watsonx_assistant_name    = "example-wx-assistant-basic"
-  plan                      = "plus-trial"
+  plan                      = "free"
   resource_group_id         = "a8c...8230a" # replace with ID of resource group
 }
 
@@ -147,7 +147,7 @@ statement instead the previous block.
 |------|-------------|------|---------|:--------:|
 | <a name="input_access_tags"></a> [access\_tags](#input\_access\_tags) | A list of access tags to apply to the watsonx Assistant instance. For more information, see https://cloud.ibm.com/docs/account?topic=account-access-tags-tutorial. | `list(string)` | `[]` | no |
 | <a name="input_existing_watsonx_assistant_instance_crn"></a> [existing\_watsonx\_assistant\_instance\_crn](#input\_existing\_watsonx\_assistant\_instance\_crn) | The CRN of an existing watsonx Assistant instance.If not provided, a new instance will be provisioned. | `string` | `null` | no |
-| <a name="input_plan"></a> [plan](#input\_plan) | The plan that is required to provision the watsonx Assistant instance. Possible values are: free, plus, enterprise . For 'free' plan, the `service_endpoints` value is ignored and the default service configuration is applied. | `string` | `"free"` | no |
+| <a name="input_plan"></a> [plan](#input\_plan) | The plan that is required to provision the watsonx Assistant instance. Possible values are: free, plus, enterprise. For 'free' plan, the `service_endpoints` value is ignored and the default service configuration is applied. | `string` | `"free"` | no |
 | <a name="input_region"></a> [region](#input\_region) | Region where the watsonx Assistant instance will be provisioned. Required if creating a new instance. | `string` | `"us-south"` | no |
 | <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The resource group ID where the watsonx Assistant instance will be grouped. Required when creating a new instance. | `string` | `null` | no |
 | <a name="input_resource_tags"></a> [resource\_tags](#input\_resource\_tags) | Optional list of tags to describe the watsonx Assistant instance created by the module. | `list(string)` | `[]` | no |
