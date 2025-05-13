@@ -46,7 +46,8 @@
                 "profile_name": "IBM Cloud Framework for AI Security Guardrails 2.0",
                 "profile_version": "1.1.0"
               }
-            ]},
+            ]
+          },
           "iam_permissions": [
             {
               "role_crns": [
@@ -62,7 +63,6 @@
             }
           ],
           "architecture": {
-            "descriptions": "This architecture creates an instance of IBM watsonx Assistant.",
             "features": [
               {
                 "title": " Creates an instance of watsonx Assistant",
@@ -81,112 +81,112 @@
             ]
           },
           "configuration": [
-              {
-                "key": "ibmcloud_api_key",
-                "required": true,
-                "type": "password"
-              },
-              {
-                "key": "provider_visibility",
-                "options": [
-                  {
-                    "displayname": "private",
-                    "value": "private"
-                  },
-                  {
-                    "displayname": "public",
-                    "value": "public"
-                  },
-                  {
-                    "displayname": "public-and-private",
-                    "value": "public-and-private"
-                  }
-                ]
-              },
-              {
-                "key": "use_existing_resource_group"
-              },
-              {
-                "key": "resource_group_name"
-              },
-              {
-                "key": "prefix",
-                "required": true
-              },
-              {
-                "key": "name"
-              },
-              {
-                "key": "region",
-                "required": true,
-                "options": [
-                  {
-                    "displayname": "Dallas (us-south)",
-                    "value": "us-south"
-                  },
-                  {
-                    "displayname": "Frankfurt (eu-de)",
-                    "value": "eu-de"
-                  },
-                  {
-                    "displayname": "London (eu-gb)",
-                    "value": "eu-gb"
-                  },
-                  {
-                    "displayname": "Sydney (au-syd)",
-                    "value": "au-syd"
-                  },
-                  {
-                    "displayname": "Tokyo (jp-tok)",
-                    "value": "jp-tok"
-                  },
-                  {
-                    "displayname": "Washington DC (us-east)",
-                    "value": "us-east"
-                  }
-                ]
-              },
-              {
-                "key": "plan",
-                "options": [
-                  {
-                    "displayname": "Lite",
-                    "value": "free"
-                  },
-                  {
-                    "displayname": "Plus",
-                    "value": "plus"
-                  },
-                  {
-                    "displayname": "Enterprise",
-                    "value": "enterprise"
-                  }
-                ]
-              },
-              {
-                "key": "resource_tags"
-              },
-              {
-                "key": "access_tags"
-              },
-              {
-                "key": "service_endpoints",
-                "options": [
-                  {
-                    "displayname": "Public Network",
-                    "value": "public"
-                  },
-                  {
-                    "displayname": "Private Network",
-                    "value": "private"
-                  },
-                  {
-                    "displayname": "Both Public & Private Network",
-                    "value": "public-and-private"
-                  }
-                ]
-              }
-            ]
+            {
+              "key": "ibmcloud_api_key",
+              "required": true,
+              "type": "password"
+            },
+            {
+              "key": "provider_visibility",
+              "options": [
+                {
+                  "displayname": "private",
+                  "value": "private"
+                },
+                {
+                  "displayname": "public",
+                  "value": "public"
+                },
+                {
+                  "displayname": "public-and-private",
+                  "value": "public-and-private"
+                }
+              ]
+            },
+            {
+              "key": "use_existing_resource_group"
+            },
+            {
+              "key": "resource_group_name"
+            },
+            {
+              "key": "prefix",
+              "required": true
+            },
+            {
+              "key": "name"
+            },
+            {
+              "key": "region",
+              "required": true,
+              "options": [
+                {
+                  "displayname": "Dallas (us-south)",
+                  "value": "us-south"
+                },
+                {
+                  "displayname": "Frankfurt (eu-de)",
+                  "value": "eu-de"
+                },
+                {
+                  "displayname": "London (eu-gb)",
+                  "value": "eu-gb"
+                },
+                {
+                  "displayname": "Sydney (au-syd)",
+                  "value": "au-syd"
+                },
+                {
+                  "displayname": "Tokyo (jp-tok)",
+                  "value": "jp-tok"
+                },
+                {
+                  "displayname": "Washington DC (us-east)",
+                  "value": "us-east"
+                }
+              ]
+            },
+            {
+              "key": "plan",
+              "options": [
+                {
+                  "displayname": "Lite",
+                  "value": "free"
+                },
+                {
+                  "displayname": "Plus",
+                  "value": "plus"
+                },
+                {
+                  "displayname": "Enterprise",
+                  "value": "enterprise"
+                }
+              ]
+            },
+            {
+              "key": "resource_tags"
+            },
+            {
+              "key": "access_tags"
+            },
+            {
+              "key": "service_endpoints",
+              "options": [
+                {
+                  "displayname": "Public Network",
+                  "value": "public"
+                },
+                {
+                  "displayname": "Private Network",
+                  "value": "private"
+                },
+                {
+                  "displayname": "Both Public & Private Network",
+                  "value": "public-and-private"
+                }
+              ]
+            }
+          ]
         }
       ]
     }
