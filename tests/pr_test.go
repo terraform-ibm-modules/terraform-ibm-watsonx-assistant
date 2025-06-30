@@ -88,7 +88,7 @@ func TestRunExistingResourcesExample(t *testing.T) {
 	t.Parallel()
 
 	// Provision watsonx Assistant instance
-	prefix := fmt.Sprintf("ex-assistant-%s", strings.ToLower(random.UniqueId()))
+	prefix := fmt.Sprintf("ex-wxa-%s", strings.ToLower(random.UniqueId()))
 	realTerraformDir := ".."
 	tempTerraformDir, _ := files.CopyTerraformFolderToTemp(realTerraformDir, fmt.Sprintf(prefix+"-%s", strings.ToLower(random.UniqueId())))
 	tags := common.GetTagsFromTravis()
@@ -163,12 +163,12 @@ func TestRunStandardSolution(t *testing.T) {
 	})
 
 	options.TerraformVars = map[string]interface{}{
-		"plan":                "free",
-		"service_endpoints":   "public",
-		"resource_group_name": options.Prefix,
-		"provider_visibility": "public",
-		"prefix":              options.Prefix,
-		"region":              options.Region,
+		"plan":                         "free",
+		"service_endpoints":            "public",
+		"existing_resource_group_name": resourceGroup,
+		"provider_visibility":          "public",
+		"prefix":                       options.Prefix,
+		"region":                       options.Region,
 	}
 
 	output, err := options.RunTestConsistency()
@@ -183,17 +183,17 @@ func TestRunStandardUpgradeSolution(t *testing.T) {
 		Testing:       t,
 		TerraformDir:  standardSolutionTerraformDir,
 		Region:        validRegions[rand.Intn(len(validRegions))],
-		Prefix:        "wxa-da-upg",
+		Prefix:        "wxa-upg",
 		ResourceGroup: resourceGroup,
 	})
 
 	options.TerraformVars = map[string]interface{}{
-		"plan":                "free",
-		"service_endpoints":   "public",
-		"resource_group_name": options.Prefix,
-		"provider_visibility": "public",
-		"prefix":              options.Prefix,
-		"region":              options.Region,
+		"plan":                         "free",
+		"service_endpoints":            "public",
+		"existing_resource_group_name": resourceGroup,
+		"provider_visibility":          "public",
+		"prefix":                       options.Prefix,
+		"region":                       options.Region,
 	}
 
 	output, err := options.RunTestUpgrade()
