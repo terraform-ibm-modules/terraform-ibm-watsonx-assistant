@@ -34,8 +34,8 @@
           "description": "Provision and configure an instance of IBM watsonx Assistant. Explore more about IBM watsonx Assistant [here](https://www.ibm.com/products/watsonx-assistant)"
         },
         {
-          "title": "Optional Integrations",
-          "description": "This solution can be integrated with [Cloud automation for Observability](https://cloud.ibm.com/catalog/7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3/architecture/deploy-arch-ibm-observability-a3137d28-79e0-479d-8a24-758ebd5a0eab-global) that supports configuring resources for logging, monitoring and activity tracker event routing."
+          "title": "Optional observability tools",
+          "description": "Use watsonx Assistant with [Cloud automation for Observability](https://cloud.ibm.com/catalog/7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3/architecture/deploy-arch-ibm-observability-a3137d28-79e0-479d-8a24-758ebd5a0eab-global), which provides monitoring and logging capabilities to deliver deep operational insights into your watsonx Assistant deployment."
         }
       ],
       "support_details": "This product is in the community registry, as such support is handled through the originated repository. If you experience issues, please open an issue in the repository [here](https://github.com/terraform-ibm-modules/terraform-ibm-watsonx-assistant/issues). Please note this product is not supported via the IBM Cloud Support Center.",
@@ -58,15 +58,75 @@
           "iam_permissions": [
             {
               "role_crns": [
-                "crn:v1:bluemix:public:iam::::role:Editor"
+                "crn:v1:bluemix:public:iam::::role:Viewer"
               ],
-              "service_name": "all-account-management-services"
+              "service_name": "Resource group only",
+              "notes": "Viewer access is required in the resource group you want to provision in."
+            },
+            {
+              "role_crns": ["crn:v1:bluemix:public:iam::::role:Administrator"],
+              "service_name": "All Account Management services",
+              "notes": "[Optional] Required for consuming Account Configuration deployable architecture which creates resource group."
+            },
+            {
+              "role_crns": ["crn:v1:bluemix:public:iam::::role:Administrator"],
+              "service_name": "All Identity and Access enabled services",
+              "notes": "[Optional] Required for consuming Account Configuration deployable architecture which creates resource group with account settings."
             },
             {
               "role_crns": [
                 "crn:v1:bluemix:public:iam::::role:Editor"
               ],
-              "service_name": "conversation"
+              "service_name": "conversation",
+              "notes": "Required to create an instance of watsonx Assistant."
+            },
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::serviceRole:Manager",
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ],
+              "service_name": "kms",
+              "notes": "[Optional] Required if you're deploying Cloud automation for Key Protect."
+            },
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::serviceRole:Manager",
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ],
+              "service_name": "hs-crypto",
+              "notes": "[Optional] Required for enabling Hyper Protect Crypto Services in Event Routing and Cloud Logs deployable architecture."
+            },
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::serviceRole:Writer",
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ],
+              "service_name": "atracker",
+              "notes": "Required for configuring Activity Tracker event routing to Object Storage bucket and Cloud Logs."
+            },
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::serviceRole:Manager",
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ],
+              "service_name": "sysdig-monitor",
+              "notes": "[Optional] Required if you're deploying Cloud automation for Cloud Monitoring."
+            },
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::serviceRole:Manager",
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ],
+              "service_name": "logs",
+              "notes": "[Optional] Required if you're deploying Cloud automation for Cloud Logs."
+            },
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::serviceRole:Manager",
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ],
+              "service_name": "cloud-object-storage",
+              "notes": "[Optional] Required if you're deploying Cloud automation for Object Storage."
             }
           ],
           "architecture": {
@@ -236,7 +296,7 @@
          "dependencies": [
             {
               "name": "deploy-arch-ibm-account-infra-base",
-              "description": "Cloud automation for Account Configuration organizes your IBM Cloud account with a ready-made set of resource groups by default—and, when you enable the \"with Account Settings\" option, it also applies baseline security and governance settings.",
+              "description": "Cloud automation for account configuration organizes your IBM Cloud account with a ready-made set of resource groups by default. And, when you enable the \"with Account Settings\" option, it also applies baseline security and governance settings.",
               "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
               "flavors": [
                 "resource-group-only",
@@ -265,12 +325,12 @@
               "version": "v3.0.7"
             },
             {
-              "name": "deploy-arch-ibm-observability",
-              "description": "Configure IBM Cloud Logs, Cloud Monitoring and Activity Tracker event routing for analysing logs and metrics generated by the watsonx Assistant instance.",
-              "id": "a3137d28-79e0-479d-8a24-758ebd5a0eab-global",
-              "version": "v3.0.3",
+              "name": "deploy-arch-ibm-cloud-logs",
+              "description": "Configure IBM Cloud Logs for analyzing logs generated by the watsonx Assistant instance.",
+              "id": "63d8ae58-fbf3-41ce-b844-0fb5b85882ab-global",
+              "version": "v1.5.6",
               "flavors": [
-                "instances"
+                "fully-configurable"
               ],
               "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
               "optional": true,
@@ -287,8 +347,8 @@
                   "reference_version": true
                 },
                 {
-                  "dependency_input": "enable_platform_metrics",
-                  "version_input": "enable_platform_metrics",
+                  "dependency_input": "existing_resource_group_name",
+                  "version_input": "existing_resource_group_name",
                   "reference_version": true
                 },
                 {
@@ -297,6 +357,55 @@
                   "reference_version": true
                 }
               ]
+            },
+            {
+              "name": "deploy-arch-ibm-cloud-monitoring",
+              "description": "Configure IBM Cloud Monitoring for analyzing metrics generated by the watsonx Assistant instance.",
+              "flavors": ["fully-configurable"],
+              "id": "73debdbf-894f-4c14-81c7-5ece3a70b67d-global",
+              "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
+              "input_mapping": [
+                {
+                  "dependency_input": "prefix",
+                  "version_input": "prefix",
+                  "reference_version": true
+                },
+                {
+                  "dependency_input": "region",
+                  "version_input": "region",
+                  "reference_version": true
+                },
+                {
+                  "dependency_input": "enable_platform_metrics",
+                  "version_input": "enable_platform_metrics",
+                  "reference_version": true
+                }
+              ],
+              "optional": true,
+              "on_by_default": true,
+              "version": "v1.3.0"
+            },
+            {
+              "name": "deploy-arch-ibm-activity-tracker",
+              "description": "Configure a new IBM Cloud Logs instance for viewing activity tracking events generated by the watsonx Assistant instance.",
+              "flavors": ["fully-configurable"],
+              "id": "918453c3-4f97-4583-8c4a-83ef12fc7916-global",
+              "catalog_id": "7a4d68b4-cf8b-40cd-a3d1-f49aff526eb3",
+              "input_mapping": [
+                {
+                  "dependency_input": "prefix",
+                  "version_input": "prefix",
+                  "reference_version": true
+                },
+                {
+                  "dependency_input": "region",
+                  "version_input": "region",
+                  "reference_version": true
+                }
+              ],
+              "optional": true,
+              "on_by_default": true,
+              "version": "v1.1.4"
             }
           ],
           "dependency_version_2": true,
