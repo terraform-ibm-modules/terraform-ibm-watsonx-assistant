@@ -3,7 +3,7 @@
 #######################################################################################################################
 
 locals {
-  prefix = var.prefix != null ? (var.prefix != "" ? var.prefix : null) : null
+  prefix = var.prefix != null ? trimspace(var.prefix) != "" ? "${var.prefix}-" : "" : ""
 }
 
 #######################################################################################################################
@@ -13,8 +13,7 @@ locals {
 module "resource_group" {
   source                       = "terraform-ibm-modules/resource-group/ibm"
   version                      = "1.3.0"
-  resource_group_name          = var.use_existing_resource_group ? null : try("${local.prefix}-${var.resource_group_name}", var.resource_group_name)
-  existing_resource_group_name = var.use_existing_resource_group ? var.resource_group_name : null
+  existing_resource_group_name = var.existing_resource_group_name
 }
 
 #######################################################################################################################
@@ -26,7 +25,7 @@ module "watsonx_assistant" {
   region                 = var.region
   plan                   = var.plan
   resource_group_id      = module.resource_group.resource_group_id
-  watsonx_assistant_name = try("${local.prefix}-${var.name}", var.name)
+  watsonx_assistant_name = var.name != null ? "${local.prefix}${var.name}" : null
   service_endpoints      = var.service_endpoints
   access_tags            = var.access_tags
   resource_tags          = var.resource_tags
