@@ -90,7 +90,7 @@
                 "crn:v1:bluemix:public:iam::::role:Editor"
               ],
               "service_name": "kms",
-              "notes": "[Optional] Required to deploy Cloud automation for Key Protect, so you can use your own managed encryption keys with watsonx Assistant."
+              "notes": "[Optional] Required to deploy Cloud automation for Key Protect in Cloud automation for Observability."
             },
             {
               "role_crns": [
@@ -98,7 +98,7 @@
                 "crn:v1:bluemix:public:iam::::role:Editor"
               ],
               "service_name": "hs-crypto",
-              "notes": "[Optional] Required to deploy Hyper Protect Crypto Services in Cloud automation for Observability."
+              "notes": "[Optional] Required if Hyper Protect Crypto Service is used for encryption in Cloud automation for Observability."
             },
             {
               "role_crns": [
