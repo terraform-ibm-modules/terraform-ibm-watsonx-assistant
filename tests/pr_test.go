@@ -43,6 +43,7 @@ var validRegions = []string{
 	"jp-tok",
 }
 
+// TestMain will run before any parallel tests, used to read data from yaml for use with tests
 func TestMain(m *testing.M) {
 	sharedInfoSvc, _ = cloudinfo.NewCloudInfoServiceFromEnv("TF_VAR_ibmcloud_api_key", cloudinfo.CloudInfoServiceOptions{})
 	// Read the YAML file content
@@ -151,7 +152,7 @@ func TestRunExistingResourcesExample(t *testing.T) {
 	}
 }
 
-func TestRunStandardSolution(t *testing.T) {
+func TestRunFullyConfigurable(t *testing.T) {
 	t.Parallel()
 
 	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
@@ -176,7 +177,7 @@ func TestRunStandardSolution(t *testing.T) {
 	assert.NotNil(t, output, "Expected some output")
 }
 
-func TestRunStandardUpgradeSolution(t *testing.T) {
+func TestRunUpgradeFullyConfigurable(t *testing.T) {
 	t.Parallel()
 
 	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
