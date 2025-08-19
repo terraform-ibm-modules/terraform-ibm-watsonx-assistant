@@ -1,4 +1,4 @@
-# Terraform IBM Watsonx Assistant
+# Terraform IBM watsonx Assistant
 
 <!--
 Update status and "latest release" badges:

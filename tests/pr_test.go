@@ -26,7 +26,7 @@ import (
 const resourceGroup = "geretain-test-resources"
 const basicExampleDir = "examples/basic"
 const existingExampleDir = "examples/existing-instance"
-const standardSolutionTerraformDir = "solutions/fully-configurable"
+const fullyConfigurableTerraformDir = "solutions/fully-configurable"
 
 // Define a struct with fields that match the structure of the YAML data
 const yamlLocation = "../common-dev-assets/common-go-assets/common-permanent-resources.yaml"
@@ -157,7 +157,7 @@ func TestRunFullyConfigurable(t *testing.T) {
 
 	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
 		Testing:       t,
-		TerraformDir:  standardSolutionTerraformDir,
+		TerraformDir:  fullyConfigurableTerraformDir,
 		Region:        validRegions[rand.Intn(len(validRegions))],
 		Prefix:        "wxa-da",
 		ResourceGroup: resourceGroup,
@@ -182,7 +182,7 @@ func TestRunUpgradeFullyConfigurable(t *testing.T) {
 
 	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
 		Testing:       t,
-		TerraformDir:  standardSolutionTerraformDir,
+		TerraformDir:  fullyConfigurableTerraformDir,
 		Region:        validRegions[rand.Intn(len(validRegions))],
 		Prefix:        "wxa-upg",
 		ResourceGroup: resourceGroup,
