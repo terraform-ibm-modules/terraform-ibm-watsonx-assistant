@@ -26,7 +26,7 @@ import (
 const resourceGroup = "geretain-test-resources"
 const basicExampleDir = "examples/basic"
 const existingExampleDir = "examples/existing-instance"
-const standardSolutionTerraformDir = "solutions/standard"
+const fullyConfigurableTerraformDir = "solutions/fully-configurable"
 
 // Define a struct with fields that match the structure of the YAML data
 const yamlLocation = "../common-dev-assets/common-go-assets/common-permanent-resources.yaml"
@@ -43,6 +43,7 @@ var validRegions = []string{
 	"jp-tok",
 }
 
+// TestMain will run before any parallel tests, used to read data from yaml for use with tests
 func TestMain(m *testing.M) {
 	sharedInfoSvc, _ = cloudinfo.NewCloudInfoServiceFromEnv("TF_VAR_ibmcloud_api_key", cloudinfo.CloudInfoServiceOptions{})
 	// Read the YAML file content
@@ -88,7 +89,7 @@ func TestRunExistingResourcesExample(t *testing.T) {
 	t.Parallel()
 
 	// Provision watsonx Assistant instance
-	prefix := fmt.Sprintf("ex-assistant-%s", strings.ToLower(random.UniqueId()))
+	prefix := fmt.Sprintf("ex-wxa-%s", strings.ToLower(random.UniqueId()))
 	realTerraformDir := ".."
 	tempTerraformDir, _ := files.CopyTerraformFolderToTemp(realTerraformDir, fmt.Sprintf(prefix+"-%s", strings.ToLower(random.UniqueId())))
 	tags := common.GetTagsFromTravis()
@@ -151,24 +152,24 @@ func TestRunExistingResourcesExample(t *testing.T) {
 	}
 }
 
-func TestRunStandardSolution(t *testing.T) {
+func TestRunFullyConfigurable(t *testing.T) {
 	t.Parallel()
 
 	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
 		Testing:       t,
-		TerraformDir:  standardSolutionTerraformDir,
+		TerraformDir:  fullyConfigurableTerraformDir,
 		Region:        validRegions[rand.Intn(len(validRegions))],
 		Prefix:        "wxa-da",
 		ResourceGroup: resourceGroup,
 	})
 
 	options.TerraformVars = map[string]interface{}{
-		"plan":                "free",
-		"service_endpoints":   "public",
-		"resource_group_name": options.Prefix,
-		"provider_visibility": "public",
-		"prefix":              options.Prefix,
-		"region":              options.Region,
+		"plan":                         "free",
+		"service_endpoints":            "public",
+		"existing_resource_group_name": resourceGroup,
+		"provider_visibility":          "public",
+		"prefix":                       options.Prefix,
+		"region":                       options.Region,
 	}
 
 	output, err := options.RunTestConsistency()
@@ -176,24 +177,24 @@ func TestRunStandardSolution(t *testing.T) {
 	assert.NotNil(t, output, "Expected some output")
 }
 
-func TestRunStandardUpgradeSolution(t *testing.T) {
+func TestRunUpgradeFullyConfigurable(t *testing.T) {
 	t.Parallel()
 
 	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
 		Testing:       t,
-		TerraformDir:  standardSolutionTerraformDir,
+		TerraformDir:  fullyConfigurableTerraformDir,
 		Region:        validRegions[rand.Intn(len(validRegions))],
-		Prefix:        "wxa-da-upg",
+		Prefix:        "wxa-upg",
 		ResourceGroup: resourceGroup,
 	})
 
 	options.TerraformVars = map[string]interface{}{
-		"plan":                "free",
-		"service_endpoints":   "public",
-		"resource_group_name": options.Prefix,
-		"provider_visibility": "public",
-		"prefix":              options.Prefix,
-		"region":              options.Region,
+		"plan":                         "free",
+		"service_endpoints":            "public",
+		"existing_resource_group_name": resourceGroup,
+		"provider_visibility":          "public",
+		"prefix":                       options.Prefix,
+		"region":                       options.Region,
 	}
 
 	output, err := options.RunTestUpgrade()
