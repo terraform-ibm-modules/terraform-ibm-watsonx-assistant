@@ -18,7 +18,7 @@ module "watsonx_assistant" {
   source                 = "../../"
   region                 = var.region
   watsonx_assistant_name = "${var.prefix}-assistant"
-  plan                   = "free"
+  plan                   = "plus"
   resource_group_id      = module.resource_group.resource_group_id
   resource_tags          = var.resource_tags
   access_tags            = var.access_tags
