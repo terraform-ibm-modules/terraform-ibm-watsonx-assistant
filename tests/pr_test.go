@@ -235,7 +235,7 @@ func TestDefaultConfiguration(t *testing.T) {
 	require.NoError(t, err)
 }
 
-// TestDependencyPermutations runs dependency permutations for DB2 and all its dependencies
+// TestDependencyPermutations runs dependency permutations for watsonx assistant and all its dependencies
 func TestDependencyPermutations(t *testing.T) {
 	t.Skip("Skipping dependency permutations")
 	t.Parallel()
