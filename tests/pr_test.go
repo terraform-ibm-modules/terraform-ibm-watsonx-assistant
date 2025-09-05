@@ -19,6 +19,7 @@ import (
 
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/cloudinfo"
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/common"
+	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/testaddons"
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/testhelper"
 )
 
@@ -202,4 +203,50 @@ func TestRunUpgradeFullyConfigurable(t *testing.T) {
 		assert.Nil(t, err, "This should not have errored")
 		assert.NotNil(t, output, "Expected some output")
 	}
+}
+
+func TestDefaultConfiguration(t *testing.T) {
+	t.Parallel()
+
+	options := testaddons.TestAddonsOptionsDefault(&testaddons.TestAddonOptions{
+		Testing:       t,
+		Prefix:        "wxasdeft",
+		ResourceGroup: resourceGroup,
+		QuietMode:     true, // Suppress logs except on failure
+	})
+
+	options.AddonConfig = cloudinfo.NewAddonConfigTerraform(
+		options.Prefix,
+		"deploy-arch-ibm-watsonx-assistant",
+		"fully-configurable",
+		map[string]interface{}{
+			"prefix":                       options.Prefix,
+			"existing_resource_group_name": resourceGroup,
+		},
+	)
+
+	err := options.RunAddonTest()
+	require.NoError(t, err)
+}
+
+// TestDependencyPermutations runs dependency permutations for watsonx assistant and all its dependencies
+func TestDependencyPermutations(t *testing.T) {
+	t.Skip("Skipping dependency permutations")
+	t.Parallel()
+
+	options := testaddons.TestAddonsOptionsDefault(&testaddons.TestAddonOptions{
+		Testing: t,
+		Prefix:  "wxas-perm",
+		AddonConfig: cloudinfo.AddonConfig{
+			OfferingName:   "deploy-arch-ibm-watsonx-assistant",
+			OfferingFlavor: "fully-configurable",
+			Inputs: map[string]interface{}{
+				"prefix":                       "wxas-perm",
+				"existing_resource_group_name": resourceGroup,
+			},
+		},
+	})
+
+	err := options.RunAddonPermutationTest()
+	assert.NoError(t, err, "Dependency permutation test should not fail")
 }
