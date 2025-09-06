@@ -307,7 +307,7 @@
               }
             }
           ],
-         "dependencies": [
+          "dependencies": [
             {
               "name": "deploy-arch-ibm-account-infra-base",
               "description": "Cloud automation for account configuration organizes your IBM Cloud account with a ready-made set of resource groups by default. And, when you enable the \"with Account Settings\" option, it also applies baseline security and governance settings.",
