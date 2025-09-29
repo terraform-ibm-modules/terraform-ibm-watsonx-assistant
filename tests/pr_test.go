@@ -165,7 +165,7 @@ func TestRunFullyConfigurable(t *testing.T) {
 	})
 
 	options.TerraformVars = map[string]interface{}{
-		"plan":                         "free",
+		"plan":                         "plus",
 		"service_endpoints":            "public",
 		"existing_resource_group_name": resourceGroup,
 		"provider_visibility":          "public",
@@ -190,7 +190,7 @@ func TestRunUpgradeFullyConfigurable(t *testing.T) {
 	})
 
 	options.TerraformVars = map[string]interface{}{
-		"plan":                         "free",
+		"plan":                         "plus",
 		"service_endpoints":            "public",
 		"existing_resource_group_name": resourceGroup,
 		"provider_visibility":          "public",
