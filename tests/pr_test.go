@@ -219,7 +219,6 @@ func TestDefaultConfiguration(t *testing.T) {
 		"deploy-arch-ibm-watsonx-assistant",
 		"fully-configurable",
 		map[string]interface{}{
-			"prefix":                       options.Prefix,
 			"existing_resource_group_name": resourceGroup,
 		},
 	)
