@@ -28,8 +28,8 @@ For further information on IBM watsonx Assistant, including supported features, 
 ## Overview
 * [terraform-ibm-watsonx-assistant](#terraform-ibm-watsonx-assistant)
 * [Examples](./examples)
-    * [Basic example](./examples/basic)
-    * [Existing instance example](./examples/existing-instance)
+    * <div style="display: inline-block;"><a href="./examples/basic">Basic example</a></div> <div style="display: inline-block; vertical-align: middle;"><a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=wa-basic-example&repository=github.com/terraform-ibm-modules/terraform-ibm-watsonx-assistant/tree/main/examples/basic" target="_blank"><img src="https://cloud.ibm.com/media/docs/images/icons/Deploy_to_cloud.svg" alt="Deploy to IBM Cloud button"></a></div>
+    * <div style="display: inline-block;"><a href="./examples/existing-instance">Existing instance example</a></div> <div style="display: inline-block; vertical-align: middle;"><a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=wa-existing-instance-example&repository=github.com/terraform-ibm-modules/terraform-ibm-watsonx-assistant/tree/main/examples/existing-instance" target="_blank"><img src="https://cloud.ibm.com/media/docs/images/icons/Deploy_to_cloud.svg" alt="Deploy to IBM Cloud button"></a></div>
 * [Contributing](#contributing)
 <!-- END OVERVIEW HOOK -->
 
@@ -131,7 +131,7 @@ statement instead the previous block.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_crn_parser"></a> [crn\_parser](#module\_crn\_parser) | terraform-ibm-modules/common-utilities/ibm//modules/crn-parser | 1.2.0 |
+| <a name="module_crn_parser"></a> [crn\_parser](#module\_crn\_parser) | terraform-ibm-modules/common-utilities/ibm//modules/crn-parser | 1.3.0 |
 
 ### Resources
 
