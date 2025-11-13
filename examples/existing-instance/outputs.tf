@@ -26,3 +26,8 @@ output "guid" {
   description = "GUID of the existing watsonx Assistant instance"
   value       = module.existing_watsonx_assistant_instance.guid
 }
+
+output "dashboard_url" {
+  description = "The dashboard URL of the watsonx Assistant instance."
+  value       = module.existing_watsonx_assistant_instance.dashboard_url
+}
