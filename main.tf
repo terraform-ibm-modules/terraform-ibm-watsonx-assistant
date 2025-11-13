@@ -11,7 +11,7 @@ locals {
   watsonx_assistant_plan_id = var.existing_watsonx_assistant_instance_crn != null ? null : ibm_resource_instance.watsonx_assistant_instance[0].resource_plan_id
 
   # Temporary workaround for issue 128[https://github.com/terraform-ibm-modules/terraform-ibm-watsonx-assistant/issues/128].
-  watsonx_assistant_dashboard_url = "https://cloud.ibm.com/services/watsonx-assistant/${urlencode(local.watsonx_assistant_crn)}"
+  watsonx_assistant_dashboard_url = "https://cloud.ibm.com/services/conversation/${urlencode(local.watsonx_assistant_crn)}"
 }
 
 module "crn_parser" {
