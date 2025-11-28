@@ -8,9 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"math/rand"
-
-	"github.com/IBM/go-sdk-core/core"
+	"github.com/IBM/go-sdk-core/v5/core"
 	"github.com/gruntwork-io/terratest/modules/files"
 	"github.com/gruntwork-io/terratest/modules/logger"
 	"github.com/gruntwork-io/terratest/modules/random"
@@ -70,7 +68,7 @@ func setupOptions(t *testing.T, prefix string, exampleDir string) *testhelper.Te
 
 	options.TerraformVars = map[string]interface{}{
 		"access_tags":    permanentResources["accessTags"],
-		"region":         validRegions[rand.Intn(len(validRegions))],
+		"region":         validRegions[common.CryptoIntn(len(validRegions))],
 		"prefix":         options.Prefix,
 		"resource_group": resourceGroup,
 		"resource_tags":  options.Tags,
@@ -111,7 +109,7 @@ func TestRunExistingResourcesExample(t *testing.T) {
 			"prefix":        prefix,
 			"resource_tags": tags,
 			"access_tags":   permanentResources["accessTags"],
-			"region":        validRegions[rand.Intn(len(validRegions))],
+			"region":        validRegions[common.CryptoIntn(len(validRegions))],
 		},
 		// Set Upgrade to true to ensure latest version of providers and modules are used by terratest.
 		// This is the same as setting the -upgrade=true flag with terraform.
@@ -161,7 +159,7 @@ func setupFullyConfigurableOptions(t *testing.T, prefix string) *testschematic.T
 	options := testschematic.TestSchematicOptionsDefault(&testschematic.TestSchematicOptions{
 		Testing:        t,
 		TemplateFolder: fullyConfigurableTerraformDir,
-		Region:         validRegions[rand.Intn(len(validRegions))],
+		Region:         validRegions[common.CryptoIntn(len(validRegions))],
 		Prefix:         prefix,
 		TarIncludePatterns: []string{
 			"*.tf",
