@@ -38,22 +38,22 @@ output "dashboard_url" {
 }
 
 output "next_steps_text" {
-  value       = "Now, you can launch the Watsonx Assistant tool and create your assistant."
+  value       = "Now, you can start building your chatbot using watsonx Assistant."
   description = "Next steps text"
 }
 
 output "next_step_primary_label" {
-  value       = "Go to Watsonx Assistant instance dashboard"
+  value       = "Go to IBM watsonx Assistant dashboard"
   description = "Primary label"
 }
 
 output "next_step_primary_url" {
-  value       = "${module.watsonx_assistant.dashboard_url}?paneId=manage"
+  value       = module.watsonx_assistant.dashboard_url
   description = "Primary URL"
 }
 
 output "next_step_secondary_label" {
-  value       = "Learn more about watsonx Assistant"
+  value       = "Learn more about IBM watsonx Assistant"
   description = "Secondary label"
 }
 
