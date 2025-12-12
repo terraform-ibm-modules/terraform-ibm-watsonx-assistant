@@ -36,3 +36,28 @@ output "dashboard_url" {
   description = "The dashboard URL of the watsonx Assistant instance."
   value       = module.watsonx_assistant.dashboard_url
 }
+
+output "next_steps_text" {
+  value       = "Now, you can use watsonx Assistant to build your virtual assistant."
+  description = "Next steps text"
+}
+
+output "next_step_primary_label" {
+  value       = "Go to IBM watsonx Assistant dashboard"
+  description = "Primary label"
+}
+
+output "next_step_primary_url" {
+  value       = module.watsonx_assistant.dashboard_url
+  description = "Primary URL"
+}
+
+output "next_step_secondary_label" {
+  value       = "Learn more about IBM watsonx Assistant"
+  description = "Secondary label"
+}
+
+output "next_step_secondary_url" {
+  value       = "https://cloud.ibm.com/docs/watson-assistant?topic=watson-assistant-getting-started"
+  description = "Secondary URL"
+}
