@@ -38,7 +38,7 @@ output "dashboard_url" {
 }
 
 output "next_steps_text" {
-  value       = "Now, you can start building your chatbot using watsonx Assistant."
+  value       = "Now, you can use watsonx Assistant to build your virtual assistant."
   description = "Next steps text"
 }
 
