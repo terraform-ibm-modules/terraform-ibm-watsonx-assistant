@@ -55,6 +55,7 @@
         {
           "label": "Fully configurable",
           "name": "fully-configurable",
+          "short_description": "Ideal for users who want flexible watsonx Assistant deployment with customizable monitoring, logging, and activity tracking configurations.",
           "index": 1,
           "install_type": "fullstack",
           "working_directory": "solutions/fully-configurable",
