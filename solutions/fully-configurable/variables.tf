@@ -72,13 +72,13 @@ variable "plan" {
 
 variable "resource_tags" {
   type        = list(string)
-  description = "Optional list of tags to describe the newly created watsonx Assistant instance."
+  description = "Add user resource tags to the Watsonx Assistant instance to organize, track, and manage costs. [Learn more](https://cloud.ibm.com/docs/account?topic=account-tag&interface=ui#tag-types)."
   default     = []
 }
 
 variable "access_tags" {
   type        = list(string)
-  description = "A list of access tags to apply to the watsonx Assistant instance. [Learn more](https://cloud.ibm.com/docs/account?topic=account-access-tags-tutorial)."
+  description = "Add access management tags to the Watsonx Assistant instance to control access. [Learn more](https://cloud.ibm.com/docs/account?topic=account-tag&interface=ui#create-access-console)."
   default     = []
 }
 
