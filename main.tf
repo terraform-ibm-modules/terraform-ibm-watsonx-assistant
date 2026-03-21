@@ -47,8 +47,14 @@ resource "ibm_resource_instance" "watsonx_assistant_instance" {
 # Attach Access Tags
 ##############################################################################
 
+# Lookup existing IAM access tags from `var.access_tags` if provided.
+data "ibm_iam_access_tag" "access_tag" {
+  for_each = length(var.access_tags) != 0 ? toset(var.access_tags) : []
+  name     = each.value
+}
+
 resource "ibm_resource_tag" "watsonx_assistant_tag" {
-  count       = length(var.access_tags) == 0 ? 0 : 1
+  count       = length(var.access_tags) == 0 || length(data.ibm_iam_access_tag.access_tag) == 0 ? 0 : 1
   resource_id = local.watsonx_assistant_crn
   tags        = var.access_tags
   tag_type    = "access"
