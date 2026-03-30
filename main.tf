@@ -54,7 +54,8 @@ data "ibm_iam_access_tag" "access_tag" {
 }
 
 resource "ibm_resource_tag" "watsonx_assistant_tag" {
-  count       = length(var.access_tags) == 0 || length(data.ibm_iam_access_tag.access_tag) == 0 ? 0 : 1
+  depends_on  = [data.ibm_iam_access_tag.access_tag]
+  count       = length(var.access_tags) == 0 ? 0 : 1
   resource_id = local.watsonx_assistant_crn
   tags        = var.access_tags
   tag_type    = "access"
