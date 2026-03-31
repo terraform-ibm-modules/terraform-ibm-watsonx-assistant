@@ -54,7 +54,7 @@ data "ibm_iam_access_tag" "access_tag" {
 }
 
 resource "ibm_resource_tag" "watsonx_assistant_tag" {
-  depends_on  = [data.ibm_iam_access_tag.access_tag]
+  depends_on  = [data.ibm_iam_access_tag.access_tag] # Force dependency on data source validation to ensure access_tags exist and are valid before use.
   count       = length(var.access_tags) == 0 ? 0 : 1
   resource_id = local.watsonx_assistant_crn
   tags        = var.access_tags
