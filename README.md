@@ -157,18 +157,19 @@ statement instead the previous block.
 |------|------|
 | [ibm_resource_instance.watsonx_assistant_instance](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/resource_instance) | resource |
 | [ibm_resource_tag.watsonx_assistant_tag](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/resource_tag) | resource |
+| [ibm_iam_access_tag.access_tag](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/data-sources/iam_access_tag) | data source |
 | [ibm_resource_instance.existing_assistant_instance](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/data-sources/resource_instance) | data source |
 
 ### Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_access_tags"></a> [access\_tags](#input\_access\_tags) | A list of access tags to apply to the watsonx Assistant instance. For more information, see https://cloud.ibm.com/docs/account?topic=account-access-tags-tutorial. | `list(string)` | `[]` | no |
+| <a name="input_access_tags"></a> [access\_tags](#input\_access\_tags) | Add access management tags to the watsonx Assistant instance to control access. [Learn more](https://cloud.ibm.com/docs/account?topic=account-tag&interface=ui#create-access-console). | `list(string)` | `[]` | no |
 | <a name="input_existing_watsonx_assistant_instance_crn"></a> [existing\_watsonx\_assistant\_instance\_crn](#input\_existing\_watsonx\_assistant\_instance\_crn) | The CRN of an existing watsonx Assistant instance.If not provided, a new instance will be provisioned. | `string` | `null` | no |
 | <a name="input_plan"></a> [plan](#input\_plan) | The plan that is required to provision the watsonx Assistant instance. Possible values are: free, plus, enterprise. For 'free' plan, the `service_endpoints` value is ignored and the default service configuration is applied. | `string` | `"free"` | no |
 | <a name="input_region"></a> [region](#input\_region) | Region where the watsonx Assistant instance will be provisioned. Required if creating a new instance. | `string` | `"us-south"` | no |
 | <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The resource group ID where the watsonx Assistant instance will be grouped. Required when creating a new instance. | `string` | `null` | no |
-| <a name="input_resource_tags"></a> [resource\_tags](#input\_resource\_tags) | Optional list of tags to describe the watsonx Assistant instance created by the module. | `list(string)` | `[]` | no |
+| <a name="input_resource_tags"></a> [resource\_tags](#input\_resource\_tags) | Add user resource tags to the watsonx Assistant instance to organize, track, and manage costs. [Learn more](https://cloud.ibm.com/docs/account?topic=account-tag&interface=ui#tag-types). | `list(string)` | `[]` | no |
 | <a name="input_service_endpoints"></a> [service\_endpoints](#input\_service\_endpoints) | Types of the service endpoints that can be set to a watsonx Assistant instance. Possible values are : public, private or public-and-private. For 'free' plan, the value is ignored and the default service configuration is applied. | `string` | `"public-and-private"` | no |
 | <a name="input_watsonx_assistant_name"></a> [watsonx\_assistant\_name](#input\_watsonx\_assistant\_name) | The name of the watsonx Assistant instance. Required if creating a new instance. | `string` | `null` | no |
 
