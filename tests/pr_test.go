@@ -82,7 +82,7 @@ func setupOptions(t *testing.T, prefix string, exampleDir string) *testhelper.Te
 }
 
 func TestRunBasicExample(t *testing.T) {
-	t.Parallel()
+	t.Skip()
 
 	options := setupOptions(t, "wxa-basic", basicExampleDir)
 
@@ -92,7 +92,7 @@ func TestRunBasicExample(t *testing.T) {
 }
 
 func TestRunExistingResourcesExample(t *testing.T) {
-	t.Parallel()
+	t.Skip()
 
 	// Provision watsonx Assistant instance
 	prefix := fmt.Sprintf("ex-wxa-%s", strings.ToLower(random.UniqueID()))
@@ -186,7 +186,7 @@ func setupFullyConfigurableOptions(t *testing.T, prefix string) *testschematic.T
 }
 
 func TestRunFullyConfigurableSchematics(t *testing.T) {
-	t.Parallel()
+	t.Skip()
 
 	options := setupFullyConfigurableOptions(t, "wxa-da")
 
@@ -195,7 +195,7 @@ func TestRunFullyConfigurableSchematics(t *testing.T) {
 }
 
 func TestRunFullyConfigurableUpgradeSchematics(t *testing.T) {
-	t.Parallel()
+	t.Skip()
 
 	options := setupFullyConfigurableOptions(t, "wxa-upg")
 	options.CheckApplyResultForUpgrade = true
@@ -207,7 +207,7 @@ func TestRunFullyConfigurableUpgradeSchematics(t *testing.T) {
 }
 
 func TestDefaultConfiguration(t *testing.T) {
-	t.Parallel()
+	t.Skip()
 
 	options := testaddons.TestAddonsOptionsDefault(&testaddons.TestAddonOptions{
 		Testing:       t,
