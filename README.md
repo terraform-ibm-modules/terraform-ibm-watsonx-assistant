@@ -7,7 +7,7 @@ Update status and "latest release" badges:
   1. For the status options, see https://terraform-ibm-modules.github.io/documentation/#/badge-status
   2. Update the "latest release" badge to point to the correct module's repo. Replace "terraform-ibm-module-template" in two places.
 -->
-[![Inactive](https://img.shields.io/badge/Status-Inactive-slategrey)](https://terraform-ibm-modules.github.io/documentation/#/badge-status)
+[![Inactive](https://img.shields.io/badge/Status-Inactive-slategrey)](https://terraform-ibm-modules.github.io/documentation/#/badge-status?id=other-statuses)
 [![latest release](https://img.shields.io/github/v/release/terraform-ibm-modules/terraform-ibm-watsonx-assistant?logo=GitHub&sort=semver)](https://github.com/terraform-ibm-modules/terraform-ibm-watsonx-assistant/releases/latest)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 [![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com/)
